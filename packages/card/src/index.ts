@@ -23,7 +23,7 @@ const cardShadow = ({ shadow, theme }: Props) => {
 }
 
 export const Card = styled(Flex)<Props>`
-  border-radius: 3px;
+  border-radius: 4px;
   ${cardBorder}
   ${cardShadow}
 `

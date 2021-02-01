@@ -31,9 +31,9 @@ const size = props => {
         padding: 
         ${themeSpace(1, props.theme)}px 
         ${themeSpace(2, props.theme)}px;
-        border-radius: 2px;
-        font-size: 16px;
-        ${outlineSize(2)}
+        border-radius: 4px;
+        font-size: 14px;
+        ${outlineSize(4)}
       `
     case 'large':
     default:
@@ -41,9 +41,9 @@ const size = props => {
         padding: 
         ${themeSpace(2, props.theme)}px 
         ${themeSpace(3, props.theme)}px;
-        border-radius: 2px;
-        font-size: 20px;
-        ${outlineSize(2)}
+        border-radius: 4px;
+        font-size: 16px;
+        ${outlineSize(4)}
       `
   }
 }
@@ -55,7 +55,6 @@ const colorVariant = props => {
 
   return `
     position: relative;
-    background-color: ${bg};
     transition: color 0.3s ease, background-color 0.3s ease;
     :hover {
       background-color: ${hover};
@@ -80,7 +79,27 @@ const colorVariant = props => {
   `
 }
 
-type Props = {}
+const shadow = ({ shadow, bg, important, theme }: Props & { theme: Theme }) => {
+  const shadows = []
+  if (shadow) {
+    const color = themeColor('darks.2', theme)
+    shadows.push(`${transparentize(0.7, color)} 0 8px 24px`)
+  }
+  if (important) {
+    const color = themeColor(bg, theme)
+    shadows.push(`${transparentize(0.3, color)} 0 0 24px`)
+  }
+
+  return `box-shadow: ${shadows.join(', ')};`
+}
+
+type Props = {
+  shadow?: boolean
+  important?: boolean
+  bg?: string
+  color?: string
+  size?: 'large' | 'small' | 'circle'
+}
 const Button = styled(Flex.withComponent('button'))<Props>`
   font-family: ${props => (props.theme as Theme).fontFamily};
   font-size: 14px;
@@ -89,6 +108,7 @@ const Button = styled(Flex.withComponent('button'))<Props>`
   outline: none;
   ${size}
   ${colorVariant}
+  ${shadow}
 `
 Button.defaultProps = {
   bg: 'primary',

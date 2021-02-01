@@ -45,9 +45,8 @@ export function themeSpace<Props extends { theme: Theme }>(
 ): (props: Props) => number
 export function themeSpace(space: number | string, theme: Theme): string
 export function themeSpace(space: number | string, theme?: undefined | Theme) {
-  console.log(theme)
   const fn = themeGet(`space.${space}`)
-  return theme ? fn({ theme }) : fn
+  return theme ? fn({ theme }) || space : fn
 }
 
 export function themeColor<Props extends { theme: Theme }>(
@@ -56,5 +55,5 @@ export function themeColor<Props extends { theme: Theme }>(
 export function themeColor(color: string, theme: Theme): string
 export function themeColor(color: string, theme?: undefined | Theme) {
   const fn = themeGet(`colors.${color}`)
-  return theme ? fn({ theme }) : fn
+  return theme ? fn({ theme }) || color : fn
 }
