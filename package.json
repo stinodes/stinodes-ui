@@ -7,7 +7,8 @@
   "scripts": {
     "build": "lerna exec --ignore storybook --parallel -- tsc -p tsconfig.json",
     "bootstrap": "lerna bootstrap --use-workspaces",
-    "bootstrap-all": "lerna bootstrap --use-workspaces && lerna exec --parallel -- lerna bootstrap --use-workspaces"
+    "bootstrap-all": "lerna bootstrap --use-workspaces && lerna exec --parallel -- lerna bootstrap --use-workspaces",
+    "storybook": "lerna exec --scope storybook -- yarn storybook"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
