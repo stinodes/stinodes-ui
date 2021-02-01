@@ -44,3 +44,14 @@ This library uses:
 - React (duh)
 - Emotion
 - Styled System
+
+## Extra development commands
+
+### Creating a new package:
+
+```
+$ yarn create <package-name>
+```
+
+This will add a package with the provided name, and correctly set the values in the `package.json` and the `README.md`.
+Currently `packages/box` is used as a template.

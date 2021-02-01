@@ -8,6 +8,7 @@
     "build": "lerna exec --ignore storybook --parallel -- tsc -p tsconfig.json",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "bootstrap-all": "lerna bootstrap --use-workspaces && lerna exec --parallel -- lerna bootstrap --use-workspaces",
+    "create": "bash ./create-package.sh",
     "storybook": "lerna exec --scope storybook -- yarn storybook"
   },
   "devDependencies": {
