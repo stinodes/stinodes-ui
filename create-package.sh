@@ -3,13 +3,18 @@ package_name=$1
 package_dir=packages/$package_name
 package_json_file=$package_dir/package.json
 
+success_color="\033[0;32m"
+info_color="\033[0;34m"
+error_color="\033[0;31m"
+reset_color="\033[0m"
+
 if [[ $# -eq 0 ]] ; then
-    echo 'Package name as argument is required but not found.'
+    echo -e "${error_color}Package name as argument is required but not found."
     exit 0
 fi
 if [ -d "$package_dir" ]; then
   # Take action if $DIR exists. #
-  echo "This package already exists."
+  echo -e "${error_color}This package already exists."
   exit 0
 fi
 
@@ -42,3 +47,7 @@ function replace_in_file() {
 }
 
 replace_in_file "$package_dir/README.md"
+
+echo -e "${success_color}Package \"$package_name\" has been created."
+echo -e "You can find it at $package_dir."
+echo -e "${info_color}Happy coding!${reset_color}"
