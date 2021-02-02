@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 import { color, compose, space, typography } from 'styled-system'
-import { Theme, themeColor } from '@stinodes-ui/theme'
+import { themeFont, themeColor } from '@stinodes-ui/theme'
 
 const typoStyling = compose(typography, space, color)
 
 export const Text = styled.span`
-  font-family: ${props => (props.theme as Theme).fontFamily};
+  font-family: ${themeFont};
   margin: 0;
   color: ${themeColor('darks.1')};
   line-height: 1.3;

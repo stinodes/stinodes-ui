@@ -1,22 +1,10 @@
 import styled from '@emotion/styled'
 import { tint, shade, transparentize } from 'polished'
-import { Theme, themeSpace, themeColor } from '@stinodes-ui/theme'
+import { Theme } from '@emotion/react'
+import { themeFont, themeSpace, themeColor } from '@stinodes-ui/theme'
+import { outline } from '@stinodes-ui/utils/lib/outline'
 import { Flex } from '@stinodes-ui/flex'
 
-const outlineWidth = 4
-
-const outlineSize = radius => {
-  return `
-    :before { 
-      top: -${outlineWidth}px;
-      right: -${outlineWidth}px;
-      bottom: -${outlineWidth}px;
-      left: -${outlineWidth}px;
-      border-radius: ${radius + outlineWidth}px;
-      border-width: ${outlineWidth}px;
-    }
-  `
-}
 const size = props => {
   switch (props.size) {
     case 'circle':
@@ -24,7 +12,6 @@ const size = props => {
         width: 48px;
         height: 48px;
         border-radius: 24px;
-        ${outlineSize(24)}
       `
     case 'small':
       return `
@@ -33,7 +20,6 @@ const size = props => {
         ${themeSpace(2, props.theme)}px;
         border-radius: 4px;
         font-size: 14px;
-        ${outlineSize(4)}
       `
     case 'large':
     default:
@@ -43,7 +29,6 @@ const size = props => {
         ${themeSpace(3, props.theme)}px;
         border-radius: 4px;
         font-size: 16px;
-        ${outlineSize(4)}
       `
   }
 }
@@ -61,20 +46,6 @@ const colorVariant = props => {
     }
     :active {
       background-color: ${active};
-    }
-    :before {
-      content: " ";
-      pointer-events: none;
-      position: absolute;
-      border-color: ${transparentize(0.3, bg)};
-      border-style: solid;
-      transition: opacity .3s ease;
-      opacity: 0;
-    }
-    :focus {
-      :before { 
-        opacity: 1;
-      }
     }
   `
 }
@@ -99,14 +70,16 @@ type Props = {
   bg?: string
   color?: string
   size?: 'large' | 'small' | 'circle'
+  showOutline?: boolean
 }
 const Button = styled(Flex.withComponent('button'))<Props>`
-  font-family: ${props => (props.theme as Theme).fontFamily};
+  font-family: ${themeFont};
   font-size: 14px;
   border: none;
   font-weight: 600;
   outline: none;
   ${size}
+  ${outline}
   ${colorVariant}
   ${shadow}
 `

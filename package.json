@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna exec --ignore storybook --parallel -- tsc -p tsconfig.json",
+    "build": "lerna exec --ignore storybook --ignore type-defs --parallel -- tsc -p tsconfig.json",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "bootstrap-all": "lerna bootstrap --use-workspaces && lerna exec --parallel -- lerna bootstrap --use-workspaces",
     "create-package": "bash ./create-package.sh",

@@ -1,5 +1,6 @@
 import { mergeDeepRight } from 'ramda'
 import { transparentize } from 'polished'
+import { Theme as EmotionTheme } from '@emotion/react'
 import { Theme as _Theme } from 'styled-system'
 import { themeGet } from '@styled-system/theme-get'
 import _styled from '@emotion/styled'
@@ -36,24 +37,31 @@ export const baseTheme = {
   space: [0, 8, 16, 24, 32, 48, 64, 128, 256, 512],
 }
 
-export type Theme = _Theme & { fontFamily: string }
+type CustomTheme = _Theme & { fontFamily: string }
+export { CustomTheme as Theme }
 
-export const createTheme = (theme: Theme) => mergeDeepRight(baseTheme, theme)
+export const createTheme = (theme: CustomTheme) =>
+  mergeDeepRight(baseTheme, theme)
 
-export function themeSpace<Props extends { theme: Theme }>(
+export const themeFont = themeGet('fontFamily')
+
+export function themeSpace<Props extends { theme: EmotionTheme }>(
   space: number | string,
 ): (props: Props) => number
-export function themeSpace(space: number | string, theme: Theme): string
-export function themeSpace(space: number | string, theme?: undefined | Theme) {
+export function themeSpace(space: number | string, theme: EmotionTheme): string
+export function themeSpace(
+  space: number | string,
+  theme?: undefined | EmotionTheme,
+) {
   const fn = themeGet(`space.${space}`)
   return theme ? fn({ theme }) || space : fn
 }
 
-export function themeColor<Props extends { theme: Theme }>(
+export function themeColor<Props extends { theme: EmotionTheme }>(
   color: string,
 ): (props: Props) => string
-export function themeColor(color: string, theme: Theme): string
-export function themeColor(color: string, theme?: undefined | Theme) {
+export function themeColor(color: string, theme: EmotionTheme): string
+export function themeColor(color: string, theme?: undefined | EmotionTheme) {
   const fn = themeGet(`colors.${color}`)
   return theme ? fn({ theme }) || color : fn
 }
