@@ -21,5 +21,4 @@ Example.args = {
   error: false,
   highlight: false,
   placeholder: 'Placeholder text...',
-  value: '',
 }

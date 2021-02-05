@@ -2,8 +2,9 @@ import styled from '@emotion/styled'
 import { tint, shade, transparentize } from 'polished'
 import { Theme } from '@emotion/react'
 import { themeFont, themeSpace, themeColor } from '@stinodes-ui/theme'
-import { outline } from '@stinodes-ui/utils/lib/outline'
+import { boxShadowOutline } from '@stinodes-ui/utils/lib/outline'
 import { Flex } from '@stinodes-ui/flex'
+import { color, space } from 'styled-system'
 
 const size = props => {
   switch (props.size) {
@@ -40,7 +41,6 @@ const colorVariant = props => {
 
   return `
     position: relative;
-    transition: color 0.3s ease, background-color 0.3s ease;
     :hover {
       background-color: ${hover};
     }
@@ -50,18 +50,19 @@ const colorVariant = props => {
   `
 }
 
-const shadow = ({ shadow, bg, important, theme }: Props & { theme: Theme }) => {
+const shadow = (props: Props & { theme: Theme }) => {
   const shadows = []
-  if (shadow) {
-    const color = themeColor('darks.2', theme)
+
+  if (props.shadow) {
+    const color = themeColor('darks.2', props.theme)
     shadows.push(`${transparentize(0.7, color)} 0 8px 24px`)
   }
-  if (important) {
-    const color = themeColor(bg, theme)
+  if (props.important) {
+    const color = themeColor(props.bg, props.theme)
     shadows.push(`${transparentize(0.3, color)} 0 0 24px`)
   }
 
-  return `box-shadow: ${shadows.join(', ')};`
+  return boxShadowOutline(props, shadows.join(', '))
 }
 
 type Props = {
@@ -72,14 +73,17 @@ type Props = {
   size?: 'large' | 'small' | 'circle'
   showOutline?: boolean
 }
-const Button = styled(Flex.withComponent('button'))<Props>`
+const Button = styled.button<Props>`
   font-family: ${themeFont};
   font-size: 14px;
   border: none;
   font-weight: 600;
   outline: none;
+  text-align: center;
+  transition: color 0.3s ease, background-color 0.3s ease, box-shadow .3s ease;
+  ${color}
+  ${space}
   ${size}
-  ${outline}
   ${colorVariant}
   ${shadow}
 `
@@ -87,5 +91,6 @@ Button.defaultProps = {
   bg: 'primary',
   color: 'lights.4',
 }
+Button.displayName = 'Button'
 
 export { Button }

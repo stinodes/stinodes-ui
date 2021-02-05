@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { typography, color } from 'styled-system'
+import { typography, color, layout } from 'styled-system'
 import { themeFont, themeColor } from '@stinodes-ui/theme'
 import { boxShadowOutline } from '@stinodes-ui/utils/lib/outline'
 
@@ -19,15 +19,17 @@ const inputBorder = props => {
   return `
     border: 2px solid;
     border-color: ${color};
-    transition: border-color .2s ease;
     :focus, :hover {
-      border-color: ${highlightColor}
+      border-color: ${highlightColor};
     }
-    ${boxShadowOutline({ ...props, bg: props.border || 'primaries.2' })}
+    ${boxShadowOutline({ ...props, bg: props.border }, '')}
+    transition: box-shadow .3s ease, border-color .3s ease;
     `
 }
 
-export const Input = styled.input`
+type Props = { error?: boolean; border?: string; highlight?: boolean }
+
+export const Input = styled.input<Props>`
   display: flex;
   border-radius: 4px;
   outline: 0;
@@ -36,4 +38,12 @@ export const Input = styled.input`
   font-family: ${themeFont};
   color: ${themeColor('darks.1')};
   ${inputBorder}
+  ${typography}
+  ${layout}
 `
+Input.displayName = 'Input'
+
+export const TextArea = styled(Input.withComponent('textarea'))`
+  resize: none;
+`
+TextArea.displayName = 'TextArea'
