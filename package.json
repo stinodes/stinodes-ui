@@ -1,15 +1,15 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "scripts": {
     "build": "lerna exec --ignore storybook --ignore type-defs --parallel -- tsc -p tsconfig.json",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "bootstrap-all": "lerna bootstrap --use-workspaces && lerna exec --parallel -- lerna bootstrap --use-workspaces",
     "create-package": "bash ./create-package.sh",
-    "storybook": "lerna exec --scope storybook -- yarn storybook"
+    "storybook": "lerna exec --scope storybook -- yarn storybook",
+    "build-watch": "yarn build -w",
+    "dev": "concurrently \"yarn build-watch\" \"yarn storybook\""
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
@@ -29,6 +29,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.12.0",
+    "concurrently": "^5.3.0",
     "emotion": "^11.0.0",
     "emotion-theming": "^11.0.0",
     "lerna": "^3.4.1",

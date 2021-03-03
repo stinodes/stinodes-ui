@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Input } from '@stinodes-ui/input'
+import { Input, TextArea } from '@stinodes-ui/input'
 
 export default {
   title: 'Primitives/Input',
@@ -15,8 +15,18 @@ const Template = props => {
   //   return <button />
   return <Input {...props} />
 }
-export const Example = Template.bind({})
-Example.args = {
+export const TextInput = Template.bind({})
+TextInput.args = {
+  color: 'darks.1',
+  error: false,
+  highlight: false,
+  placeholder: 'Placeholder text...',
+}
+
+export const TextAreaInput = props => {
+  return <TextArea {...props} />
+}
+TextAreaInput.args = {
   color: 'darks.1',
   error: false,
   highlight: false,

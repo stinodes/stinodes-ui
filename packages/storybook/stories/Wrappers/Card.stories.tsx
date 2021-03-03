@@ -19,39 +19,11 @@ const stringToProps = (string: string) =>
   }, {})
 
 const CardTemplate = ({ spacings, shadow, border, ...props }) => {
-  const shadowRef = useRef<boolean | string>(shadow)
-  const borderRef = useRef<boolean | string>(border)
   const spacingProps = stringToProps(spacings)
-
-  const shadowVal = useMemo(() => {
-    try {
-      const v = themeColor(shadow, { colorName: 'darks.2', alpha: 0.1 })({
-        theme,
-      })
-      console.log(v, shadow, theme)
-      return shadow
-    } catch (e) {
-      return Example.args.shadow
-    }
-  }, [shadow])
-
-  const borderVal = useMemo(() => {
-    try {
-      themeColor(border, { colorName: 'darks.2', alpha: 0.05 })({ theme })
-      return border
-    } catch (e) {
-      return Example.args.border
-    }
-  }, [border])
 
   return (
     <Box p={4} bg="lights.2">
-      <Card
-        {...props}
-        {...spacingProps}
-        shadow={shadowVal}
-        border={borderVal}
-      />
+      <Card {...props} {...spacingProps} shadow={shadow} border={border} />
     </Box>
   )
 }
