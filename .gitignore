@@ -1,7 +1,8 @@
 node_modules
 .git
 lib
-.yarn/*
+.yarn
+.pages
 !.yarn/cache
 !.yarn/patches
 !.yarn/plugins
