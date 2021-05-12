@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsxImportSource": "@emotion/react",
+    "jsx": "react-jsx",
     "module": "commonjs",
     "declaration": true,
     "noImplicitAny": false,
@@ -19,8 +20,12 @@
     ]
   },
   "exclude": [
+    ".yarn",
     "node_modules",
+    "src/stories/*",
+    "lib/*", 
     "**/*.spec.ts",
     "**/*.story.tsx"
+
   ]
 }
