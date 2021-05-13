@@ -6,7 +6,7 @@ const getPortalRoot = (id = 'portal-root') => {
   if (!root) {
     root = document.createElement('div')
     root.id = id
-    document.body.appendChild(root)
+    document.body.append(root)
   }
   return root
 }

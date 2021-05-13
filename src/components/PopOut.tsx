@@ -13,9 +13,10 @@ import React, {
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { CSSTransition } from 'react-transition-group'
-import { assoc } from 'ramda'
+import { assoc, not } from 'ramda'
 import { Underlay } from './Underlay'
 import { Portal } from './Portal'
+import { useMixedState } from '../hooks/useMixedState'
 
 const Container = styled.div`
   position: fixed;
@@ -42,7 +43,7 @@ const transitionStyles = css`
   }
 `
 
-type Props = {
+type BaseProps = {
   underlay?: boolean
   onClose?: () => any
   children: ReactNode
@@ -52,6 +53,15 @@ type Props = {
   closeOnClick?: boolean
   offset?: number
   component?: string | ReactElement
+}
+
+type ControlledProps = BaseProps & {
+  visible: boolean
+  onClose: () => any
+}
+type UncontrolledProps = BaseProps & {
+  visible?: void
+  onClose?: void
 }
 
 export const PopOut = ({
@@ -64,17 +74,16 @@ export const PopOut = ({
   offset = 16,
   component = 'div',
   ...props
-}: Props) => {
+}: ControlledProps | UncontrolledProps) => {
   const ref = useRef<null | HTMLDivElement>(null)
-  const [{ visible, position }, setState] = useState<null | {
-    position: {
-      left?: number
-      top?: number
-      right?: number
-      bottom?: number
-    }
-    visible: boolean
-  }>({ visible: false, position: {} })
+  // const positionRef = useRef<
+  //  Partial<{ top: number; left: number; right: number; bottom: number }>
+  // >({})
+
+  const [visible, setVisible] = useMixedState<boolean>(false, {
+    state: props.visible,
+    setState: props.onClose && (newState => !newState && props.onClose()),
+  })
 
   const calculatePosition = useCallback(() => {
     if (ref.current) {
@@ -100,25 +109,22 @@ export const PopOut = ({
     }
   }, [ref])
 
-  const open = useCallback(
-    () => setState({ position: calculatePosition(), visible: true }),
-    [calculatePosition, setState],
-  )
-  const close = useCallback(() => setState(assoc('visible', false)), [setState])
-  const toggle = useCallback(
-    () =>
-      setState(state =>
-        state.visible
-          ? { visible: false, ...state }
-          : { visible: true, position: calculatePosition() },
-      ),
-    [calculatePosition, setState],
-  )
+  const open = useCallback(() => setVisible(true), [
+    calculatePosition,
+    setVisible,
+  ])
+  const close = useCallback(() => setVisible(false), [setVisible])
+  const toggle = useCallback(() => setVisible(not), [
+    calculatePosition,
+    setVisible,
+  ])
 
   const containerProps = useMemo(() => {
     if (trigger === 'click') {
       return {
-        onClick: toggle,
+        onClick: () => {
+          toggle()
+        },
       }
     }
     if (trigger === 'hover') {
@@ -131,7 +137,7 @@ export const PopOut = ({
   }, [toggle, open, close, trigger])
 
   useEffect(() => {
-    if (trigger === 'visible' && !position) {
+    if (trigger === 'visible') {
       open()
       return close
     }
@@ -140,7 +146,7 @@ export const PopOut = ({
   const element = useMemo(
     () =>
       typeof component === 'string'
-        ? createElement('div', null, null)
+        ? createElement(component, null, null)
         : component,
     [component],
   )
@@ -160,10 +166,10 @@ export const PopOut = ({
             css={transitionStyles}
             onClick={e => {
               e.stopPropagation()
-              closeOnClick && setState(state => ({ ...state, visible: false }))
+              closeOnClick && close()
             }}>
             {underlay && <Underlay onClick={close} />}
-            <Container style={position}>{content}</Container>
+            <Container style={calculatePosition()}>{content}</Container>
           </div>
         </CSSTransition>
       </Portal>,

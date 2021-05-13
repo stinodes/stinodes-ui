@@ -80,6 +80,7 @@ export const Select = ({
   border,
   ...props
 }: Props) => {
+  const [visible, setVisible] = useState<boolean>(false)
   const parsedOptions = useMemo(
     () =>
       options.map(option =>
@@ -102,7 +103,10 @@ export const Select = ({
 
   return (
     <PopOut
+      visible={visible}
+      onClose={() => setVisible(false)}
       closeOnClick
+      underlay
       align="center"
       trigger="click"
       content={
@@ -113,7 +117,7 @@ export const Select = ({
         </OptionsCard>
       }>
       <Wrapper>
-        <Input {...inputProps} readOnly />
+        <Input {...inputProps} readOnly onClick={() => setVisible(true)} />
         <ChevronContainer>
           <Chevron open={false} icon="chevron-down" />
         </ChevronContainer>

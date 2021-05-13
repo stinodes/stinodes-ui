@@ -37,4 +37,5 @@ Hover.args = {
   align: 'left',
   offset: 16,
   underlay: false,
+  closeOnClick: false,
 }
