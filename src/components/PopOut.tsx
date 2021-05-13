@@ -45,7 +45,6 @@ const transitionStyles = css`
 
 type BaseProps = {
   underlay?: boolean
-  onClose?: () => any
   children: ReactNode
   content: ReactNode
   align?: Align

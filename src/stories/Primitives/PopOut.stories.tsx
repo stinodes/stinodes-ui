@@ -1,3 +1,4 @@
+import { not } from 'ramda'
 import React, { useState } from 'react'
 import { Button, Card, Flex, PopOut, Text } from '../../'
 
@@ -17,14 +18,14 @@ export default {
   },
 }
 
-export const Hover = props => {
+export const Uncontrolled = props => {
   return (
     <Flex width={400}>
       <PopOut
         {...props}
         content={
           <Card shadow bg="lights.4" px={2} py={1}>
-            <Text>This is a permanent pop-out.</Text>
+            <Text>This is a pop-out.</Text>
           </Card>
         }>
         <Button>Hover Me!</Button>
@@ -32,7 +33,38 @@ export const Hover = props => {
     </Flex>
   )
 }
-Hover.args = {
+Uncontrolled.args = {
+  trigger: 'hover',
+  align: 'left',
+  offset: 16,
+  underlay: false,
+  closeOnClick: false,
+}
+
+export const Controlled = props => {
+  const [state, setState] = useState(false)
+  return (
+    <Flex width={400} alignItems="center">
+      <Button onClick={() => setState(not)} size="small" mr={2}>
+        Toggle
+      </Button>
+      <PopOut
+        {...props}
+        visible={state}
+        onClose={() => setState(false)}
+        content={
+          <Card shadow bg="lights.4" px={2} py={1}>
+            <Text>This is a controlled pop-out.</Text>
+          </Card>
+        }>
+        <Card shadow bg="lights.4" p={3}>
+          <Text>I am a card with a controlled pop-out</Text>
+        </Card>
+      </PopOut>
+    </Flex>
+  )
+}
+Controlled.args = {
   trigger: 'hover',
   align: 'left',
   offset: 16,
