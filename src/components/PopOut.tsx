@@ -42,7 +42,7 @@ const transitionStyles = css`
   }
 `
 
-type BaseProps = {
+type Props = {
   underlay?: boolean
   onClose?: () => any
   children: ReactNode

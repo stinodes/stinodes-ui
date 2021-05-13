@@ -113,9 +113,9 @@ export const Select = ({
         </OptionsCard>
       }>
       <Wrapper>
-        <Input {...inputProps} readOnly onClick={() => setOpen(!open)} />
+        <Input {...inputProps} readOnly />
         <ChevronContainer>
-          <Chevron open={open} icon="chevron-down" />
+          <Chevron open={false} icon="chevron-down" />
         </ChevronContainer>
       </Wrapper>
     </PopOut>
