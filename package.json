@@ -3,6 +3,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "storybook": "start-storybook -p 6006",
+    "test": "exit 0;",
     "build-watch": "yarn build -w",
     "deploy-storybook": "storybook-to-ghpages --out=./.pages"
   },
