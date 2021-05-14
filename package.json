@@ -1,5 +1,18 @@
 {
   "name": "stinodes-ui",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stinodes/stinodes-ui.git"
+  },
+  "keywords": ["react", "components"],
+  "author": "stinodes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stinodes/stinodes-ui/issues"
+  },
+  "main": "./lib/index.js",
+  "files": ["./lib"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "storybook": "start-storybook -p 6006",
