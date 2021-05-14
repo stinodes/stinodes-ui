@@ -27,7 +27,7 @@ jobs:
         run: yarn version "${GITHUB_REF:11}" -i
 
       - name: Publish
-        run: yarn publish --access public
+        run: yarn npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
