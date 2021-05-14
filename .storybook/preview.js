@@ -1,11 +1,10 @@
-import { ThemeProvider } from '@emotion/react'
-import { createTheme } from '../src'
+import { Provider } from '../src'
 
 export const decorators = [
   Story => (
-    <ThemeProvider theme={createTheme({})}>
+    <Provider>
       <Story />
-    </ThemeProvider>
+    </Provider>
   ),
 ]
 
