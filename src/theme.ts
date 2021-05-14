@@ -40,7 +40,7 @@ export const baseTheme = {
 type CustomTheme = _Theme & { fontFamily: string }
 export { CustomTheme as Theme }
 
-export const createTheme = (theme: CustomTheme) =>
+export const createTheme = (theme: Partial<CustomTheme>) =>
   mergeDeepRight(baseTheme, theme)
 
 export const themeFont = themeGet('fontFamily')
