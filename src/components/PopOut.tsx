@@ -79,9 +79,11 @@ export const PopOut = ({
   //  Partial<{ top: number; left: number; right: number; bottom: number }>
   // >({})
 
-  const [visible, setVisible] = useMixedState<boolean>(false, {
+  const [visible, setVisible] = useMixedState<boolean>(!!props.visible, {
     state: props.visible,
-    setState: props.onClose && (newState => !newState && props.onClose()),
+    setState: props.onClose
+      ? (newState: boolean) => !newState && props.onClose && props.onClose()
+      : undefined,
   })
 
   const calculatePosition = useCallback(() => {

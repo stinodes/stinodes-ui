@@ -12449,7 +12449,7 @@ fsevents@^1.2.7:
     react-dom: ^17.0.1
     react-transition-group: ^4.4.1
     styled-system: ^5.1.5
-    typescript: ^4.2.4
+    typescript: latest
     webpack: ^5.15.0
     webpack-merge: ^5.7.3
   peerDependencies:
@@ -13161,7 +13161,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-typescript@^4.2.4:
+typescript@latest:
   version: 4.2.4
   resolution: "typescript@npm:4.2.4"
   bin:
@@ -13171,7 +13171,7 @@ typescript@^4.2.4:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.2.4#builtin<compat/typescript>":
+"typescript@patch:typescript@latest#builtin<compat/typescript>":
   version: 4.2.4
   resolution: "typescript@patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"
   bin:

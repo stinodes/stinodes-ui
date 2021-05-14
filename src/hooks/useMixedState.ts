@@ -1,28 +1,20 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 
-type UseMixedState<State> = {
-  (
-    initialState: any,
-    props: {
-      state: State
-      setState: Dispatch<SetStateAction<State>>
-    },
-  ): [State, Dispatch<SetStateAction<State>>]
+function useMixedState<State>(
+  initialState: State,
+  props?: void | {
+    setState?: void | Dispatch<SetStateAction<State>>
+    state?: void | State
+  },
+): [State, Dispatch<SetStateAction<State>>]
 
-  (
-    initialState: State,
-    props: {
-      setState?: void
-      state?: void
-    },
-  ): [State, Dispatch<SetStateAction<State>>]
-}
-
-export const useMixedState: UseMixedState = (initialState, props) => {
+function useMixedState<State>(initialState, props) {
   const stateTuple = useState<State>(initialState)
 
-  if (props.state !== undefined && props.setState !== undefined)
+  if (props.state !== undefined || props.setState !== undefined)
     return [props.state, props.setState]
 
   return stateTuple
 }
+
+export { useMixedState }
