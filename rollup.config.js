@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
+import del from 'rollup-plugin-delete'
 import { babel } from '@rollup/plugin-babel'
 
 import packageJson from './package.json'
@@ -24,6 +25,7 @@ export default [
       },
     ],
     plugins: [
+      del({ targets: 'build' }),
       peerDepsExternal(),
       resolve(),
       commonjs(),
@@ -34,6 +36,12 @@ export default [
   {
     input: './build/esm/types/index.d.ts',
     output: [{ file: './build/index.d.ts', format: 'esm' }],
-    plugins: [dts()],
+    plugins: [
+      dts(),
+      del({
+        targets: ['./build/esm/types', './build/cjs/types'],
+        hook: 'buildEnd',
+      }),
+    ],
   },
 ]
