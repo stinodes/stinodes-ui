@@ -1,4 +1,4 @@
-# stinodes-ui
+# stinodes-ui ![npm](https://img.shields.io/npm/v/stinodes-ui?style=for-the-badge)
 
 ### Opiniated building blocks for modern web-apps
 
