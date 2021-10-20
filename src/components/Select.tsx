@@ -1,7 +1,7 @@
-import { useMemo, useState, SelectHTMLAttributes } from 'react'
+import { useMemo, useState } from 'react'
 import styled from '@emotion/styled'
 import { Icon } from './Icons'
-import { Input } from './Input'
+import { Input, InputStyleProps, SafeInputProps } from './Input'
 import { Card } from './Card'
 import { themeColor, themeFont } from '../theme'
 import { PopOut } from './PopOut'
@@ -55,23 +55,22 @@ const Option = styled.button`
 `
 type StringSelectInputProps = {
   value: null | string
-  onSelect: (value: string) => any
+  onChange: (value: string) => any
   options: string[]
 }
 type ValueSelectInputProps = {
   value: null | any
-  onSelect: (value: any) => any
+  onChange: (value: any) => any
   options: { value: any; label: string }[]
 }
-type SelectInputProps = StringSelectInputProps | ValueSelectInputProps
 
-type Props = {
-  error?: boolean
-  highlight?: boolean
-  border?: string
-  placeholder?: string
-} & SelectInputProps &
-  Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onSelect' | 'value'>
+type Props = InputStyleProps
+
+type SafeHTMLProps = Omit<SafeInputProps, keyof StringSelectInputProps>
+
+export type SelectProps = Props &
+  SafeHTMLProps &
+  (StringSelectInputProps | ValueSelectInputProps)
 
 export const Select = ({
   placeholder,
@@ -80,8 +79,9 @@ export const Select = ({
   value,
   highlight,
   border,
+  onChange,
   ...props
-}: Props) => {
+}: SelectProps) => {
   const [visible, setVisible] = useState<boolean>(false)
   const parsedOptions = useMemo(() => {
     return options.map((option: string | { value: any; label: string }) =>
@@ -95,11 +95,12 @@ export const Select = ({
     return null
   }, [value, parsedOptions])
 
-  const inputProps = {
+  const inputProps: InputStyleProps & { value?: string } = {
     error,
     highlight,
     border,
     value: selectedOption?.label || placeholder,
+    ...props,
   }
 
   return (
@@ -113,7 +114,7 @@ export const Select = ({
       content={
         <OptionsCard border shadow py={1}>
           {parsedOptions.map(({ label, value }) => (
-            <Option onClick={() => props.onSelect(value)}>{label}</Option>
+            <Option onClick={() => onChange(value)}>{label}</Option>
           ))}
         </OptionsCard>
       }>

@@ -7,6 +7,9 @@ export default {
   argTypes: {
     border: { control: 'color' },
     color: { control: 'color' },
+    size: {
+      control: { type: 'select', options: ['large', 'small'] },
+    },
   },
 }
 
