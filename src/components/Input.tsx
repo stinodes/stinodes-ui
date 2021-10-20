@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { typography, color, layout } from 'styled-system'
-import { themeFont, themeColor, Theme } from '../theme'
+import { themeFont, themeColor, Theme, themeSpace } from '../theme'
 import { boxShadowOutline } from '../utils'
 
 export const Label = styled.label`
@@ -27,16 +27,41 @@ const inputBorder = (props: Props & { theme: Theme }) => {
     `
 }
 
-type Props = { error?: boolean; border?: string; highlight?: boolean }
+const size = (props: Props & { theme: Theme }) => {
+  switch (props.size) {
+    case 'small':
+      return `
+        padding: 
+        ${themeSpace(1, props.theme)}px 
+        ${themeSpace(2, props.theme)}px;
+        border-radius: 4px;
+        font-size: 14px;
+      `
+    case 'large':
+    default:
+      return `
+        padding: 
+        ${themeSpace(2, props.theme)}px 
+        ${themeSpace(3, props.theme)}px;
+        border-radius: 4px;
+        font-size: 16px;
+      `
+  }
+}
+
+type Props = {
+  error?: boolean
+  border?: string
+  highlight?: boolean
+  size: 'small' | 'large'
+}
 
 export const Input = styled.input<Props>`
   display: flex;
-  border-radius: 4px;
   outline: 0;
-  padding: 8px;
-  font-size: 16px;
   font-family: ${themeFont};
   color: ${themeColor('darks.1')};
+  ${size}
   ${inputBorder}
   ${typography}
   ${layout}
