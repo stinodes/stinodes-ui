@@ -35,16 +35,22 @@ const size = (props: Props & { theme: Theme }) => {
 }
 
 const colorVariant = (props: Props & { theme: Theme }) => {
+  const color = themeColor(props.color || 'white', props.theme)
   const bg = themeColor(props.bg || 'primary', props.theme)
   const hover = tint(0.2, bg)
   const active = shade(0.1, bg)
 
   return `
+    color: ${color};
+    background: ${bg};
+    border: 2px ${bg} solid;
     :hover {
       background-color: ${hover};
+      border-color: ${hover};
     }
     :active {
       background-color: ${active};
+      border-color: ${active};
     }
   `
 }
@@ -80,8 +86,8 @@ const Button = styled.button<Props>`
   border: none;
   outline: none;
   text-align: center;
-  transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-  ${color}
+  transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease,
+    border-color 0.3s ease;
   ${space}
   ${size}
   ${colorVariant}

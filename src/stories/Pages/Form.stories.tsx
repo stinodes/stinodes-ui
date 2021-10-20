@@ -1,16 +1,7 @@
 import { Story } from '@storybook/react'
 import { useState } from 'react'
-import {
-  Button,
-  Checkbox,
-  Col,
-  Flex,
-  H2,
-  Input,
-  Row,
-  Select,
-  TextArea,
-} from '../../'
+import { Button, Checkbox, Col, Flex, H2, Row, Select, TextArea } from '../../'
+import { SelectField, TextAreaField, TextField } from '../../components/Field'
 
 export default {
   title: 'Page Examples/Forms',
@@ -32,35 +23,39 @@ export const Simple: Story<{ error: boolean }> = props => {
       <H2>Create a post:</H2>
       <Row mt={2} gutter={1}>
         <Col width={1} mb={2} gutter={1}>
-          <Input
+          <TextField
+            label="Title"
             error={props.error}
             placeholder="Post title"
             value={state.title}
-            onChange={e => changeField('title', e.target.value)}
+            onChange={e => changeField('title', e.currentTarget.value)}
           />
         </Col>
         <Col width={1} mb={2} gutter={1}>
-          <TextArea
+          <TextAreaField
+            label="Content"
             error={props.error}
             placeholder="Write some content here..."
             value={state.content}
-            onChange={e => changeField('content', e.target.value)}
+            onChange={e => changeField('content', e.currentTarget.value)}
           />
         </Col>
         <Col width={1 / 2} mb={2} gutter={1}>
-          <Select
+          <SelectField
+            label="Category"
+            help="This will be used to filter content for viewers."
             error={props.error}
             placeholder="Category"
             options={['Development', 'Lifestyle', 'Epic Gamer Moments']}
             value={state.category}
-            onSelect={(v: string) => changeField('category', v)}
+            onChange={(v: string) => changeField('category', v)}
           />
         </Col>
         <Col width={1 / 2} mb={2} gutter={1} justifyContent="center">
           <Checkbox
             error={props.error}
             checked={state.publish}
-            onChange={e => changeField('publish', e.target.checked)}>
+            onChange={e => changeField('publish', e.currentTarget.checked)}>
             Publish Post
           </Checkbox>
         </Col>
