@@ -1,5 +1,11 @@
 import styled from '@emotion/styled'
-import { typography, color, layout } from 'styled-system'
+import {
+  typography,
+  color,
+  layout,
+  TypographyProps,
+  LayoutProps,
+} from 'styled-system'
 import { themeFont, themeColor, Theme, themeSpace } from '../theme'
 import { boxShadowOutline } from '../utils'
 
@@ -54,7 +60,8 @@ type Props = {
   border?: string
   highlight?: boolean
   size: 'small' | 'large'
-}
+} & TypographyProps &
+  LayoutProps
 
 export const Input = styled.input<Props>`
   display: flex;
