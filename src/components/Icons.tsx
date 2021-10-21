@@ -1,17 +1,26 @@
-import { ComponentProps } from 'react'
+import { ComponentPropsWithoutRef, ComponentType } from 'react'
 import { ResponsiveValue } from 'styled-system'
 import { Text } from './Typography'
 
-const I = Text.withComponent('i')
+const I: typeof Text = Text.withComponent('i')
 
-type TextProps = ComponentProps<typeof Text>
-type Props = TextProps & { icon: string; size?: ResponsiveValue<number> }
+type IconProps = {
+  icon: string
+  size?: ResponsiveValue<number>
+  className?: string
+}
 
-export const Icon = ({ icon, className, ...props }: Props) => (
+export const Icon: ComponentType<
+  IconProps & ComponentPropsWithoutRef<typeof Text>
+> = ({ icon, className, ...props }) => (
   <I
-    color="inherit"
-    fontSize={props.size || 16}
+    fontSize={props.size}
     {...props}
     className={`feather icon-${icon} ${className}`}
   />
 )
+Icon.displayName = 'Icon'
+Icon.defaultProps = {
+  size: 16,
+  color: 'inherit',
+}

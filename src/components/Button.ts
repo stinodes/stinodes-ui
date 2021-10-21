@@ -1,12 +1,16 @@
-import styled from '@emotion/styled'
+import styled, { StyledComponent } from '@emotion/styled'
 import { tint, shade, transparentize } from 'polished'
 import { Theme } from '@emotion/react'
-import { color, space, SpaceProps } from 'styled-system'
+import { space, SpaceProps } from 'styled-system'
 import { themeFont, themeSpace, themeColor } from '../theme'
 import { boxShadowOutline } from '../utils'
-import { Flex } from './Flex'
+import { Flex, FlexBoxProps } from './Flex'
+import { HTMLAttributes } from 'react'
 
-const size = (props: Props & { theme: Theme }) => {
+type ButtonSizeProps = {
+  size?: 'circle' | 'small' | 'large'
+}
+const size = (props: ButtonSizeProps & { theme: Theme }) => {
   switch (props.size) {
     case 'circle':
       return `
@@ -34,7 +38,11 @@ const size = (props: Props & { theme: Theme }) => {
   }
 }
 
-const colorVariant = (props: Props & { theme: Theme }) => {
+type ColorVariantProps = {
+  color?: string
+  bg?: string
+}
+const colorVariant = (props: ColorVariantProps & { theme: Theme }) => {
   const color = themeColor(props.color || 'white', props.theme)
   const bg = themeColor(props.bg || 'primary', props.theme)
   const hover = tint(0.2, bg)
@@ -55,7 +63,14 @@ const colorVariant = (props: Props & { theme: Theme }) => {
   `
 }
 
-const shadow = (props: Props & { theme: Theme }) => {
+type ShadowProps = {
+  shadow?: boolean
+  important?: boolean
+  bg?: string
+  showOutline?: boolean
+  outlineColor?: string
+}
+const shadow = (props: ShadowProps & { theme: Theme }) => {
   const shadows = []
 
   if (props.shadow) {
@@ -70,16 +85,15 @@ const shadow = (props: Props & { theme: Theme }) => {
   return boxShadowOutline(props, shadows.join(', '))
 }
 
-type Props = {
-  shadow?: boolean
-  important?: boolean
-  bg?: string
-  color?: string
-  size?: 'large' | 'small' | 'circle'
-  showOutline?: boolean
-  outlineColor?: string
-} & SpaceProps
-const Button = styled.button<Props>`
+export type ButtonProps = ButtonSizeProps &
+  ColorVariantProps &
+  ShadowProps &
+  SpaceProps
+
+const Button: StyledComponent<
+  ButtonProps,
+  HTMLAttributes<HTMLButtonElement>
+> = styled.button`
   font-family: ${themeFont};
   font-size: 14px;
   font-weight: 600;
@@ -99,7 +113,11 @@ Button.defaultProps = {
 }
 Button.displayName = 'Button'
 
-export const FlexButton = styled(Flex.withComponent('button'))`
+export type FlexButtonProps = ColorVariantProps & ShadowProps & FlexBoxProps
+export const FlexButton: StyledComponent<
+  FlexButtonProps,
+  HTMLAttributes<HTMLButtonElement>
+> = styled(Flex.withComponent('button'))`
   font-family: ${themeFont};
   font-size: 14px;
   font-weight: 600;

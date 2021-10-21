@@ -3,7 +3,7 @@ import { transparentize } from 'polished'
 import { themeColor } from '../theme'
 import { Flex } from './Flex'
 
-export const Underlay = styled(Flex)`
+export const Underlay: typeof Flex = styled(Flex)`
   position: fixed;
   top: 0;
   right: 0;

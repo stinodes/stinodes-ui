@@ -19,7 +19,6 @@ const Template: Story<{
   highlight: boolean
   placeholder: string
 }> = props => {
-  //   return <button />
   return <Input {...props} />
 }
 

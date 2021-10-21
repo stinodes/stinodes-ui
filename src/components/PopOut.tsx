@@ -1,5 +1,6 @@
 import {
   cloneElement,
+  ComponentType,
   createElement,
   ReactElement,
   ReactNode,
@@ -61,7 +62,9 @@ type UncontrolledProps = BaseProps & {
   onClose?: void
 }
 
-export const PopOut = ({
+type PopOutProps = BaseProps & (ControlledProps | UncontrolledProps)
+
+export const PopOut: ComponentType<PopOutProps> = ({
   underlay,
   children,
   content,
@@ -71,7 +74,7 @@ export const PopOut = ({
   offset = 16,
   component = 'div',
   ...props
-}: ControlledProps | UncontrolledProps) => {
+}) => {
   const ref = useRef<null | HTMLDivElement>(null)
 
   const [visible, setVisible] = useMixedState<boolean>(!!props.visible, {
@@ -168,3 +171,4 @@ export const PopOut = ({
     ],
   )
 }
+PopOut.displayName = 'PopOut'

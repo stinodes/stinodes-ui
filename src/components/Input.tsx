@@ -1,36 +1,34 @@
 import styled, { StyledComponent } from '@emotion/styled'
-import { HTMLProps } from 'react'
+import { HTMLAttributes } from 'react'
 import {
   typography,
   color,
   layout,
   TypographyProps,
   LayoutProps,
+  ColorProps,
 } from 'styled-system'
 import { themeFont, themeColor, Theme, themeSpace } from '../theme'
 import { boxShadowOutline } from '../utils'
 
-export type InputStyleProps = {
-  border?: string
-  highlight?: boolean
-  size?: 'small' | 'large'
-} & TypographyProps &
-  LayoutProps
-
-type UnsafeProps = 'size' | 'height' | 'width' | 'compact'
-export type SafeInputProps<El = HTMLInputElement> = Omit<
-  HTMLProps<El>,
-  UnsafeProps
->
-
-export const Label = styled.label`
+type LabelProps = ColorProps & TypographyProps
+export const Label: StyledComponent<
+  LabelProps,
+  HTMLAttributes<HTMLLabelElement>
+> = styled.label`
   font-family: ${themeFont};
   color: ${themeColor('darks.4')};
   ${typography}
   ${color}
 `
 
-const inputBorder = (props: InputStyleProps & { theme: Theme }) => {
+type InputBorderProps = {
+  border?: string
+  highlight?: boolean
+  outlineColor?: string
+  showOutline?: boolean
+}
+const inputBorder = (props: InputBorderProps & { theme: Theme }) => {
   const highlightColor = themeColor(props.border || 'primaries.2', props.theme)
   let color = themeColor('lights.0', props.theme)
 
@@ -47,7 +45,10 @@ const inputBorder = (props: InputStyleProps & { theme: Theme }) => {
     `
 }
 
-const size = (props: InputStyleProps & { theme: Theme }) => {
+type InputSizeProps = {
+  size?: 'small' | 'large'
+}
+const size = (props: InputSizeProps & { theme: Theme }) => {
   switch (props.size) {
     case 'small':
       return `
@@ -69,10 +70,15 @@ const size = (props: InputStyleProps & { theme: Theme }) => {
   }
 }
 
+export type InputProps = { readOnly?: boolean } & InputBorderProps &
+  InputSizeProps &
+  TypographyProps &
+  LayoutProps
+
 export const Input: StyledComponent<
-  InputStyleProps,
-  SafeInputProps<HTMLInputElement>
-> = styled.input<InputStyleProps>`
+  InputProps,
+  HTMLAttributes<HTMLInputElement>
+> = styled.input<InputProps>`
   display: flex;
   outline: 0;
   font-family: ${themeFont};
@@ -85,8 +91,8 @@ export const Input: StyledComponent<
 Input.displayName = 'Input'
 
 export const TextArea: StyledComponent<
-  InputStyleProps,
-  SafeInputProps<HTMLTextAreaElement>
+  InputProps,
+  HTMLAttributes<HTMLTextAreaElement>
 > = styled(Input.withComponent('textarea'))`
   resize: none;
 `
