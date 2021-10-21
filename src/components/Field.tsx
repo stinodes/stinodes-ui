@@ -1,22 +1,26 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react'
+import {
+  Component,
+  ComponentPropsWithoutRef,
+  ComponentType,
+  ReactNode,
+} from 'react'
 import { Flex } from './Flex'
 import { Input, Label, TextArea } from './Input'
 import { Select } from './Select'
 import { Text } from './Typography'
 
-export type FieldProps<C extends ElementType> = {
-  component: C
-
+export type FieldProps = {
   label?: string
   error?: null | boolean | string
   help?: null | string
-} & ComponentPropsWithoutRef<C>
+}
 
-export const Field = function <C extends ElementType>({
-  component: InputComponent,
-  ...props
-}: FieldProps<C>) {
-  const { label, error, help, ...inputProps } = props
+export const Field = ({
+  label,
+  error,
+  help,
+  children,
+}: FieldProps & { children: ReactNode }) => {
   return (
     <Flex flexDirection="column">
       {label && (
@@ -24,11 +28,7 @@ export const Field = function <C extends ElementType>({
           <Label>{label}</Label>
         </Flex>
       )}
-      <InputComponent
-        {...inputProps}
-        border={!!error && 'error'}
-        highlight={props.highlight || !!props.error}
-      />
+      {children}
       {error && typeof error === 'string' ? (
         <Text mt="2px" fontSize={12} color="error">
           {error}
@@ -42,17 +42,56 @@ export const Field = function <C extends ElementType>({
   )
 }
 
-type TextFieldProps = Omit<FieldProps<typeof Input>, 'component'>
-export const TextField = (props: TextFieldProps) => {
-  return <Field {...props} component={Input} />
+type TextFieldProps = ComponentPropsWithoutRef<typeof Input> & FieldProps
+export const TextField: ComponentType<TextFieldProps> = ({
+  label,
+  error,
+  help,
+  ...props
+}) => {
+  return (
+    <Field label={label} error={error} help={help}>
+      <Input
+        {...props}
+        border={!!error ? 'error' : props.border}
+        highlight={!!error || props.highlight}
+      />
+    </Field>
+  )
 }
 
-type TextAreaFieldProps = Omit<FieldProps<typeof TextArea>, 'component'>
-export const TextAreaField = (props: TextAreaFieldProps) => {
-  return <Field {...props} component={TextArea} />
+type TextAreaFieldProps = ComponentPropsWithoutRef<typeof TextArea> & FieldProps
+export const TextAreaField: ComponentType<TextAreaFieldProps> = ({
+  label,
+  error,
+  help,
+  ...props
+}) => {
+  return (
+    <Field label={label} error={error} help={help}>
+      <TextArea
+        {...props}
+        border={!!error ? 'error' : props.border}
+        highlight={!!error || props.highlight}
+      />
+    </Field>
+  )
 }
 
-type SelectFieldProps = Omit<FieldProps<typeof Select>, 'component'>
-export const SelectField = (props: SelectFieldProps) => {
-  return <Field {...props} component={Select} />
+type SelectFieldProps = ComponentPropsWithoutRef<typeof Select> & FieldProps
+export const SelectField: ComponentType<SelectFieldProps> = ({
+  label,
+  error,
+  help,
+  ...props
+}) => {
+  return (
+    <Field label={label} error={error} help={help}>
+      <Select
+        {...(props as any)}
+        border={!!error ? 'error' : props.border}
+        highlight={!!error || props.highlight}
+      />
+    </Field>
+  )
 }
