@@ -1,6 +1,7 @@
 import { keyframes } from '@emotion/react'
-import styled from '@emotion/styled'
+import styled, { StyledComponent } from '@emotion/styled'
 import { transparentize } from 'polished'
+import { HTMLAttributes } from 'react'
 import { themeColor } from '../theme'
 
 const animation = keyframes({
@@ -12,13 +13,17 @@ const animation = keyframes({
   },
 })
 
-export const Spinner = styled.div<{ size?: number; color?: string }>(
-  {
+type SpinnerProps = { size?: number; color?: string }
+export const Spinner: StyledComponent<
+  SpinnerProps,
+  HTMLAttributes<HTMLDivElement>
+> = styled.div<SpinnerProps>`
+  
     borderRadius: '50%',
     background: 'transparent',
-    animation: `${animation} 1s linear infinite`,
-  },
-  ({ theme, size, color }) => {
+    animation: ${animation} 1s linear infinite,
+  
+  ${({ theme, size, color }) => {
     const colorString = color ? themeColor(color, theme) : ''
     const sizeNumber = size || 0
     return {
@@ -30,8 +35,9 @@ export const Spinner = styled.div<{ size?: number; color?: string }>(
       width: size,
       height: size,
     }
-  },
-)
+  }}
+ `
+Spinner.displayName = 'Spinner'
 Spinner.defaultProps = {
   size: 24,
   color: 'primary',

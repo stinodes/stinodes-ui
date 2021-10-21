@@ -1,12 +1,14 @@
-import { ComponentPropsWithoutRef } from 'react'
-import styled from '@emotion/styled'
+import { ComponentPropsWithoutRef, HTMLAttributes } from 'react'
+import styled, { StyledComponent } from '@emotion/styled'
 
 import { themeColor } from '../theme'
-import { Box } from './Box'
+import { Box, BoxProps } from './Box'
 
-export const TableRow = styled(Box.withComponent('tr'))<{
-  border?: boolean
-}>`
+type TableRowProps = { border?: boolean } & BoxProps
+export const TableRow: StyledComponent<
+  TableRowProps,
+  HTMLAttributes<HTMLTableRowElement>
+> = styled(Box.withComponent('tr'))<TableRowProps>`
   border-spacing: 0;
   td,
   th {
@@ -16,7 +18,10 @@ export const TableRow = styled(Box.withComponent('tr'))<{
 `
 TableRow.displayName = 'TableRow'
 
-export const Cell = styled(Box.withComponent('td'))`
+export const Cell: StyledComponent<
+  BoxProps,
+  HTMLAttributes<HTMLTableCellElement>
+> = styled(Box.withComponent('td'))<any>`
   white-space: nowrap;
   text-align: left;
   line-height: 48px;
@@ -29,7 +34,10 @@ Cell.defaultProps = {
   bg: 'white',
 }
 
-export const TableHeader = styled(Box.withComponent('th'))`
+export const TableHeader: StyledComponent<
+  BoxProps,
+  HTMLAttributes<HTMLTableHeaderCellElement>
+> = styled(Box.withComponent('th'))`
   line-height: 28px;
   padding: 16px 10px 8px 10px;
   text-align: left;
@@ -38,16 +46,20 @@ export const TableHeader = styled(Box.withComponent('th'))`
   font-size: 14px;
   font-weight: normal;
 `
-TableHeader.displayName = 'Header'
+TableHeader.displayName = 'TableHeader'
 TableHeader.defaultProps = {
   color: 'darks.4',
 }
 
-const StyledTable = styled(Box.withComponent('table'))`
+const StyledTable: StyledComponent<
+  BoxProps,
+  HTMLAttributes<HTMLTableElement>
+> = styled(Box.withComponent('table'))<any>`
   border-collapse: collapse;
 `
 
-export const Table = (props: ComponentPropsWithoutRef<typeof StyledTable>) => {
+type TableProps = BoxProps & HTMLAttributes<HTMLTableElement>
+export const Table = (props: TableProps) => {
   return <StyledTable {...props} />
 }
 Table.displayName = 'Table'

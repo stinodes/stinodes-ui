@@ -1,10 +1,11 @@
 import {
   Children,
-  ComponentPropsWithoutRef,
+  HTMLAttributes,
+  PropsWithoutRef,
   ReactElement,
   ReactNode,
 } from 'react'
-import styled from '@emotion/styled'
+import styled, { StyledComponent } from '@emotion/styled'
 import { typography, TypographyProps } from 'styled-system'
 import { css } from '@emotion/react'
 import { assoc } from 'ramda'
@@ -13,33 +14,37 @@ import { CSSTransition } from 'react-transition-group'
 import { themeColor, themeFont } from '../theme'
 import { H2 } from './Typography'
 import { Underlay } from './Underlay'
-import { Flex } from './Flex'
+import { Flex, FlexBoxProps } from './Flex'
 import { Card } from './Card'
 import { Portal } from './Portal'
 
-const Body = styled(Flex)<TypographyProps>`
+type ModalBodyProps = FlexBoxProps & TypographyProps
+const Body: StyledComponent<
+  ModalBodyProps,
+  HTMLAttributes<HTMLDivElement>
+> = styled(Flex)<TypographyProps>`
   font-family: ${themeFont};
   ${typography}
 `
+Body.displayName = 'Modal.Body'
 Body.defaultProps = {
   color: 'darks.1',
   fontSize: 16,
   p: 3,
   flexDirection: 'column',
 }
-Body.displayName = 'Body'
 
-const Header = styled(H2)`
+const Header: typeof H2 = styled(H2)`
   border-bottom: 1px solid ${themeColor('lights.1')};
 `
+Header.displayName = 'Modal.Header'
 Header.defaultProps = { px: 3, py: 2 }
-Header.displayName = 'Header'
 
-const Footer = styled(Flex)`
+const Footer: typeof Flex = styled(Flex)`
   border-top: 1px solid ${themeColor('lights.1')};
 `
+Footer.displayName = 'Modal.Footer'
 Footer.defaultProps = { p: 3, py: 2 }
-Footer.displayName = 'Footer'
 
 const transitionStyles = css`
   transition: opacity 0.4s ease;
@@ -72,12 +77,12 @@ const transitionStyles = css`
   }
 `
 
-type Props = ComponentPropsWithoutRef<typeof Card> & {
+type ModalProps = PropsWithoutRef<typeof Card> & {
   visible: boolean
   onClose?: () => any
   children: ReactNode
 }
-export const Modal = ({ visible, onClose, children, ...props }: Props) => {
+export const Modal = ({ visible, onClose, children, ...props }: ModalProps) => {
   const childrenArr = Children.toArray(children) as ReactElement<any>[]
   const { header, body, footer } = childrenArr.reduce(
     (prev, child) => {

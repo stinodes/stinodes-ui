@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react'
+import { HTMLAttributes, useMemo, useState } from 'react'
 import styled from '@emotion/styled'
 import { Icon } from './Icons'
-import { Input, InputStyleProps, SafeInputProps } from './Input'
+import { Input, InputProps } from './Input'
 import { Card } from './Card'
 import { themeColor, themeFont } from '../theme'
 import { PopOut } from './PopOut'
@@ -64,18 +64,20 @@ type ValueSelectInputProps = {
   options: { value: any; label: string }[]
 }
 
-type Props = InputStyleProps
+type Props = InputProps
 
-type SafeHTMLProps = Omit<SafeInputProps, keyof StringSelectInputProps>
+type SafeHTMLProps = Omit<
+  HTMLAttributes<HTMLSelectElement>,
+  keyof StringSelectInputProps
+>
 
 export type SelectProps = Props &
-  SafeHTMLProps &
-  (StringSelectInputProps | ValueSelectInputProps)
+  (StringSelectInputProps | ValueSelectInputProps) &
+  SafeHTMLProps
 
 export const Select = ({
   placeholder,
   options,
-  error,
   value,
   highlight,
   border,
@@ -95,8 +97,7 @@ export const Select = ({
     return null
   }, [value, parsedOptions])
 
-  const inputProps: InputStyleProps & { value?: string } = {
-    error,
+  const inputProps: InputProps & { value?: string } = {
     highlight,
     border,
     value: selectedOption?.label || placeholder,

@@ -1,10 +1,10 @@
-import { Provider } from '../src'
+import { UIThemeProvider } from '../src'
 
 export const decorators = [
   Story => (
-    <Provider>
+    <UIThemeProvider>
       <Story />
-    </Provider>
+    </UIThemeProvider>
   ),
 ]
 export const parameters = {

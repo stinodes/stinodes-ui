@@ -1,9 +1,4 @@
-import {
-  Component,
-  ComponentPropsWithoutRef,
-  ComponentType,
-  ReactNode,
-} from 'react'
+import { ComponentPropsWithoutRef, ComponentType, ReactNode } from 'react'
 import { Flex } from './Flex'
 import { Input, Label, TextArea } from './Input'
 import { Select } from './Select'
@@ -41,6 +36,7 @@ export const Field = ({
     </Flex>
   )
 }
+Field.displayName = 'Field'
 
 type TextFieldProps = ComponentPropsWithoutRef<typeof Input> & FieldProps
 export const TextField: ComponentType<TextFieldProps> = ({
@@ -59,6 +55,7 @@ export const TextField: ComponentType<TextFieldProps> = ({
     </Field>
   )
 }
+TextField.displayName = 'TextField'
 
 type TextAreaFieldProps = ComponentPropsWithoutRef<typeof TextArea> & FieldProps
 export const TextAreaField: ComponentType<TextAreaFieldProps> = ({
@@ -77,6 +74,7 @@ export const TextAreaField: ComponentType<TextAreaFieldProps> = ({
     </Field>
   )
 }
+TextAreaField.displayName = 'TextAreaField'
 
 type SelectFieldProps = ComponentPropsWithoutRef<typeof Select> & FieldProps
 export const SelectField: ComponentType<SelectFieldProps> = ({
@@ -95,3 +93,4 @@ export const SelectField: ComponentType<SelectFieldProps> = ({
     </Field>
   )
 }
+SelectField.displayName = 'SelectField'

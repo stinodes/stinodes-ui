@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled, { StyledComponent } from '@emotion/styled'
 import {
   compose,
   layout,
@@ -11,12 +11,16 @@ import {
   FlexboxProps,
 } from 'styled-system'
 import shouldForwardProp from '@styled-system/should-forward-prop'
+import { HTMLAttributes } from 'react'
 
-type Props = LayoutProps & SpaceProps & ColorProps & FlexboxProps
+export type FlexBoxProps = LayoutProps & SpaceProps & ColorProps & FlexboxProps
 const flexFunc = compose(layout, space, color, flexbox)
-export const Flex = styled('div', { shouldForwardProp })<Props>(
-  { display: 'flex', boxSizing: 'border-box' },
-  flexFunc,
-)
-
-export type { Props as FlexProps }
+export const Flex: StyledComponent<
+  FlexBoxProps,
+  HTMLAttributes<HTMLDivElement>
+> = styled('div', { shouldForwardProp })`
+  display: flex;
+  box-sizing: border-box;
+  ${flexFunc}
+`
+Flex.displayName = 'Flex'

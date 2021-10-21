@@ -2,7 +2,10 @@ import { ReactNode } from 'react'
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { createTheme, Theme } from '../theme'
 
-export const Provider = (props: { children: ReactNode; theme?: Theme }) => {
+export const UIThemeProvider = (props: {
+  children: ReactNode
+  theme?: Theme
+}) => {
   const theme = props.theme || createTheme({})
   return (
     <ThemeProvider theme={theme}>

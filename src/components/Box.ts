@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled, { StyledComponent } from '@emotion/styled'
 import {
   compose,
   layout,
@@ -9,11 +9,17 @@ import {
   ColorProps,
 } from 'styled-system'
 import shouldForwardProp from '@styled-system/should-forward-prop'
+import { HTMLAttributes } from 'react'
 
-type Props = LayoutProps & SpaceProps & ColorProps
+export type BoxProps = LayoutProps & SpaceProps & ColorProps
+
 const boxFunc = compose(layout, space, color)
-export const Box = styled('div', { shouldForwardProp })<Props>(
-  { boxSizing: 'border-box' },
-  boxFunc,
-)
 
+export const Box: StyledComponent<
+  BoxProps,
+  HTMLAttributes<HTMLDivElement>
+> = styled('div', { shouldForwardProp })`
+  box-sizing: border-box;
+  ${boxFunc}
+`
+Box.displayName = 'Box'

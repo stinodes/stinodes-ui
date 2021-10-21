@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode } from 'react'
+import { ComponentType, InputHTMLAttributes, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { tint, transparentize } from 'polished'
 import { ResponsiveValue } from 'styled-system'
@@ -6,9 +6,12 @@ import { Theme, themeColor } from '../theme'
 import { Icon } from './Icons'
 import { Text } from './Typography'
 
-type StylingProps = { border?: string; highlight?: boolean; error?: boolean }
-
-const borderColor = (props: StylingProps & { theme: Theme }) => {
+type BorderColorProps = {
+  border?: string
+  error?: boolean
+  highlight?: boolean
+}
+const borderColor = (props: BorderColorProps & { theme: Theme }) => {
   const highlightColor = themeColor(props.border || 'primaries.2', props.theme)
   let color = themeColor('lights.0', props.theme)
 
@@ -41,7 +44,7 @@ const borderColor = (props: StylingProps & { theme: Theme }) => {
     `
 }
 
-const StyledCheckbox = styled.label<StylingProps>`
+const StyledCheckbox = styled.label<BorderColorProps>`
   position: relative;
   display: flex;
   align-items: center;
@@ -81,12 +84,16 @@ const StyledCheckbox = styled.label<StylingProps>`
   }
   ${borderColor}
 `
-type Props = InputHTMLAttributes<HTMLInputElement> & {
-  children: ReactNode
+
+type InputProps = InputHTMLAttributes<HTMLInputElement>
+type TextProps = {
   color?: ResponsiveValue<string>
   fontSize?: ResponsiveValue<string | number>
-} & StylingProps
-export const Checkbox = ({
+  children: ReactNode
+}
+type CheckboxProps = InputProps & TextProps & BorderColorProps
+
+export const Checkbox: ComponentType<CheckboxProps> = ({
   border,
   error,
   highlight,
@@ -94,7 +101,7 @@ export const Checkbox = ({
   color,
   fontSize,
   ...props
-}: Props) => (
+}) => (
   <StyledCheckbox border={border} error={error} highlight={highlight}>
     <input {...props} type="checkbox" />
     <span className="checkbox">
@@ -105,3 +112,4 @@ export const Checkbox = ({
     </Text>
   </StyledCheckbox>
 )
+Checkbox.displayName = 'Checkbox'

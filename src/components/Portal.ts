@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useEffect } from 'react'
+import { ReactNode, useMemo, useEffect, ComponentType } from 'react'
 import { createPortal } from 'react-dom'
 
 const getPortalRoot = (id = 'portal-root') => {
@@ -11,12 +11,12 @@ const getPortalRoot = (id = 'portal-root') => {
   return root
 }
 
-type Props = {
+type PortalProps = {
   rootId?: string
   children: ReactNode
 }
 
-export const Portal = ({ children, rootId }: Props) => {
+export const Portal: ComponentType<PortalProps> = ({ children, rootId }) => {
   const element = useMemo(() => document.createElement('div'), [])
 
   useEffect(() => {

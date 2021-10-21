@@ -1,4 +1,5 @@
-import styled from '@emotion/styled'
+import styled, { StyledComponent } from '@emotion/styled'
+import { HTMLAttributes } from 'react'
 import {
   color,
   ColorProps,
@@ -12,9 +13,12 @@ import { themeFont, themeColor } from '../theme'
 
 const typoStyling = compose(typography, space, color)
 
-type Props = TypographyProps & ColorProps & SpaceProps
+export type TextProps = TypographyProps & ColorProps & SpaceProps
 
-export const Text = styled.span<Props>`
+export const Text: StyledComponent<
+  TextProps,
+  HTMLAttributes<HTMLSpanElement>
+> = styled.span`
   font-family: ${themeFont};
   margin: 0;
   color: ${themeColor('darks.1')};
@@ -22,18 +26,25 @@ export const Text = styled.span<Props>`
   ${typoStyling};
 `
 
-export const Paragraph = styled(Text.withComponent('p'))<Props>`
+export const Paragraph: StyledComponent<
+  TextProps,
+  HTMLAttributes<HTMLParagraphElement>
+> = styled(Text.withComponent('p'))`
   font-size: 16px;
 `
-export const H1 = styled(Text.withComponent('h1'))<Props>`
+type HeadingComponent = StyledComponent<
+  TextProps,
+  HTMLAttributes<HTMLHeadingElement>
+>
+export const H1: HeadingComponent = styled(Text.withComponent('h1'))`
   font-size: 28px;
 `
-export const H2 = styled(Text.withComponent('h2'))<Props>`
+export const H2: HeadingComponent = styled(Text.withComponent('h2'))`
   font-size: 24px;
 `
-export const H3 = styled(Text.withComponent('h3'))<Props>`
+export const H3: HeadingComponent = styled(Text.withComponent('h3'))`
   font-size: 20px;
 `
-export const H4 = styled(Text.withComponent('h4'))<Props>`
+export const H4: HeadingComponent = styled(Text.withComponent('h4'))`
   font-size: 16px;
 `

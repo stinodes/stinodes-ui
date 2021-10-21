@@ -1,7 +1,7 @@
-import { ComponentPropsWithRef, ReactNode } from 'react'
-import styled from '@emotion/styled'
-import { typography } from 'styled-system'
-import { Button, FlexButton } from './Button'
+import { ButtonHTMLAttributes, ComponentPropsWithRef, ReactNode } from 'react'
+import styled, { StyledComponent } from '@emotion/styled'
+import { typography, TypographyProps } from 'styled-system'
+import { Button, FlexButton, FlexButtonProps } from './Button'
 import { PopOut } from './PopOut'
 import { Card } from './Card'
 import { Icon } from './Icons'
@@ -25,7 +25,7 @@ type ContextMenuProps = {
   cardProps?: ComponentPropsWithRef<typeof ContextCard>
   buttonProps?: ComponentPropsWithRef<typeof Button>
 }
-export const ContextButton = ({
+export const ContextMenu = ({
   children,
   cardProps,
   buttonProps,
@@ -49,12 +49,17 @@ export const ContextButton = ({
     </PopOut>
   )
 }
-ContextButton.defaultProps = {
+ContextMenu.displayName = 'ContextButton'
+ContextMenu.defaultProps = {
   underlay: true,
   align: 'right',
 }
 
-const Item = styled(FlexButton)(typography)
+const Item: StyledComponent<
+  FlexButtonProps & TypographyProps,
+  ButtonHTMLAttributes<HTMLButtonElement>
+> = styled(FlexButton)(typography)
+Item.displayName = 'ContextMenu.Item'
 Item.defaultProps = {
   px: 2,
   py: 2,
@@ -63,4 +68,4 @@ Item.defaultProps = {
   fontSize: 16,
   outlineColor: 'transparent',
 }
-ContextButton.Item = Item
+ContextMenu.Item = Item
