@@ -55,6 +55,7 @@ const size = (props: InputSizeProps & { theme: Theme }) => {
         padding: 
         ${themeSpace(1, props.theme)}px 
         ${themeSpace(1, props.theme)}px;
+        min-height: 38px;
         border-radius: 4px;
         font-size: 14px;
       `
@@ -62,8 +63,9 @@ const size = (props: InputSizeProps & { theme: Theme }) => {
     default:
       return `
         padding: 
-        ${themeSpace(2, props.theme)}px 
+        ${themeSpace(1, props.theme)}px 
         ${themeSpace(2, props.theme)}px;
+        min-height: 52px;
         border-radius: 4px;
         font-size: 16px;
       `

@@ -23,6 +23,7 @@ const size = (props: ButtonSizeProps & { theme: Theme }) => {
         padding: 
         ${themeSpace(1, props.theme)}px 
         ${themeSpace(2, props.theme)}px;
+        height: 38px;
         border-radius: 4px;
         font-size: 14px;
       `
@@ -30,8 +31,9 @@ const size = (props: ButtonSizeProps & { theme: Theme }) => {
     default:
       return `
         padding: 
-        ${themeSpace(2, props.theme)}px 
+        ${themeSpace(1, props.theme)}px 
         ${themeSpace(3, props.theme)}px;
+        height: 52px;
         border-radius: 4px;
         font-size: 16px;
       `
