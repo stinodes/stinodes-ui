@@ -18,25 +18,20 @@ export const Spinner: StyledComponent<
   SpinnerProps,
   HTMLAttributes<HTMLDivElement>
 > = styled.div<SpinnerProps>`
-  
-    borderRadius: '50%',
-    background: 'transparent',
-    animation: ${animation} 1s linear infinite,
-  
+  border-radius: 50%;
+  background: transparent;
+  animation: ${animation} 1s linear infinite;
   ${({ theme, size, color }) => {
     const colorString = color ? themeColor(color, theme) : ''
     const sizeNumber = size || 0
-    return {
-      border: `${sizeNumber * 0.13}px solid ${transparentize(
-        0.8,
-        colorString,
-      )}`,
-      borderLeftColor: colorString,
-      width: size,
-      height: size,
-    }
-  }}
- `
+    return `
+      border: ${sizeNumber * 0.13}px solid ${transparentize(0.8, colorString)};
+      border-left-color: ${colorString};
+      width: ${size}px;
+      height: ${size}px;
+   `
+  }};
+`
 Spinner.displayName = 'Spinner'
 Spinner.defaultProps = {
   size: 24,

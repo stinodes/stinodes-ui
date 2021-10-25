@@ -6,6 +6,27 @@ import { themeFont, themeSpace, themeColor } from '../theme'
 import { boxShadowOutline } from '../utils'
 import { Flex, FlexBoxProps } from './Flex'
 import { HTMLAttributes } from 'react'
+import { Spinner } from './Spinner'
+
+type BaseButtonProps = {
+  loading?: boolean
+}
+const BaseButton = ({
+  loading,
+  children,
+  ...props
+}: BaseButtonProps &
+  ColorVariantProps &
+  ButtonSizeProps &
+  HTMLAttributes<HTMLButtonElement>) => (
+  <button {...props}>
+    {loading && props.size === 'circle' ? null : children}
+    {loading && props.size !== 'circle' && <Flex ml={2} />}
+    {loading && (
+      <Spinner size={props.size === 'small' ? 16 : 24} color={props.color} />
+    )}
+  </button>
+)
 
 type ButtonSizeProps = {
   size?: 'circle' | 'small' | 'large'
@@ -14,6 +35,7 @@ const size = (props: ButtonSizeProps & { theme: Theme }) => {
   switch (props.size) {
     case 'circle':
       return `
+        padding: 0;
         width: 48px;
         height: 48px;
         border-radius: 24px;
@@ -90,12 +112,16 @@ const shadow = (props: ShadowProps & { theme: Theme }) => {
 export type ButtonProps = ButtonSizeProps &
   ColorVariantProps &
   ShadowProps &
-  SpaceProps
+  SpaceProps &
+  BaseButtonProps
 
 const Button: StyledComponent<
   ButtonProps,
   HTMLAttributes<HTMLButtonElement>
-> = styled.button`
+> = styled(BaseButton)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: ${themeFont};
   font-size: 14px;
   font-weight: 600;
@@ -115,11 +141,14 @@ Button.defaultProps = {
 }
 Button.displayName = 'Button'
 
-export type FlexButtonProps = ColorVariantProps & ShadowProps & FlexBoxProps
+export type FlexButtonProps = ColorVariantProps &
+  ShadowProps &
+  FlexBoxProps &
+  BaseButtonProps
 export const FlexButton: StyledComponent<
   FlexButtonProps,
   HTMLAttributes<HTMLButtonElement>
-> = styled(Flex.withComponent('button'))`
+> = styled(Flex.withComponent(BaseButton))`
   font-family: ${themeFont};
   font-size: 14px;
   font-weight: 600;
