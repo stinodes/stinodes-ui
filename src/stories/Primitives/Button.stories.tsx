@@ -26,12 +26,14 @@ Example.args = {
   shadow: false,
   important: false,
   children: 'Click me!',
+  loading: false,
 }
 
 export const FlexButtonExample: Story<{
   bg: string
   shadow: boolean
   important: boolean
+  loading: boolean
 }> = props => {
   return (
     <FlexButton {...props} width={400} height={250} p={3}>
@@ -43,4 +45,5 @@ FlexButtonExample.args = {
   bg: 'lights.4',
   shadow: false,
   important: false,
+  loading: false,
 }
