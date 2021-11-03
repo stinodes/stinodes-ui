@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react'
 import { useState } from 'react'
-import { Button, Checkbox, Col, Flex, H2, Row, Select, TextArea } from '../../'
+import { Button, Checkbox, Col, Flex, H2, Row } from '../../'
 import { SelectField, TextAreaField, TextField } from '../../components/Field'
 
 export default {

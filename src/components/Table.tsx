@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 import styled, { StyledComponent } from '@emotion/styled'
 
 import { themeColor } from '../theme'
