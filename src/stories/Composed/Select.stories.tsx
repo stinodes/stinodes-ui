@@ -24,7 +24,12 @@ const Template: Story<{
 }> = props => {
   const [state, setState] = useState<number | null>(null)
   return (
-    <Select {...props} options={options} onSelect={setState} value={state} />
+    <Select
+      {...props}
+      options={options}
+      onChange={(value: number) => setState(value)}
+      value={state}
+    />
   )
 }
 export const Example = Template.bind({})

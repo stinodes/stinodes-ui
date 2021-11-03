@@ -143,7 +143,7 @@ Button.displayName = 'Button'
 
 export type FlexButtonProps = ColorVariantProps &
   ShadowProps &
-  FlexBoxProps &
+  Omit<FlexBoxProps, 'size'> &
   BaseButtonProps
 export const FlexButton: StyledComponent<
   FlexButtonProps,

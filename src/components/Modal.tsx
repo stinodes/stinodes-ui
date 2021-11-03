@@ -1,7 +1,7 @@
 import {
   Children,
+  ComponentProps,
   HTMLAttributes,
-  PropsWithoutRef,
   ReactElement,
   ReactNode,
 } from 'react'
@@ -77,7 +77,7 @@ const transitionStyles = css`
   }
 `
 
-type ModalProps = PropsWithoutRef<typeof Card> & {
+type ModalProps = ComponentProps<typeof Card> & {
   visible: boolean
   onClose?: () => any
   children: ReactNode
@@ -104,7 +104,11 @@ export const Modal = ({ visible, onClose, children, ...props }: ModalProps) => {
           alignItems="center"
           p={3}
           flexDirection="column">
-          <Card {...props} flexDirection="column" className="modal-card">
+          <Card
+            {...props}
+            flexDirection="column"
+            className="modal-card"
+            onClick={e => e.stopPropagation()}>
             {header}
             <Body>{body}</Body>
             {footer}
