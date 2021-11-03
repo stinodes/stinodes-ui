@@ -13,10 +13,7 @@ export const Simple: Story<{}> = () => {
   return (
     <Flex>
       <Button onClick={() => setVisible(true)}>Show Me!</Button>
-      <Modal
-        visible={visible}
-        onClose={() => setVisible(false)}
-        onClick={e => e.stopPropagation()}>
+      <Modal visible={visible} onClose={() => setVisible(false)}>
         Some Text
       </Modal>
     </Flex>
@@ -29,10 +26,7 @@ export const Extended: Story<{}> = () => {
   return (
     <Flex>
       <Button onClick={() => setVisible(true)}>Show Me!</Button>
-      <Modal
-        visible={visible}
-        onClose={() => setVisible(false)}
-        onClick={e => e.stopPropagation()}>
+      <Modal visible={visible} onClose={() => setVisible(false)}>
         <Modal.Header>Extended Modal</Modal.Header>
         This is an extended modal, using multiple children and premade elements
         <Card bg="primaries.4" color="lights.4" p={2} mt={2}>

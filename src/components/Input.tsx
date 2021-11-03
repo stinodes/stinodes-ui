@@ -1,12 +1,14 @@
 import styled, { StyledComponent } from '@emotion/styled'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, InputHTMLAttributes } from 'react'
 import {
   typography,
   color,
-  layout,
   TypographyProps,
-  LayoutProps,
   ColorProps,
+  width,
+  WidthProps,
+  maxWidth,
+  MaxWidthProps,
 } from 'styled-system'
 import { themeFont, themeColor, Theme, themeSpace } from '../theme'
 import { boxShadowOutline } from '../utils'
@@ -75,26 +77,28 @@ const size = (props: InputSizeProps & { theme: Theme }) => {
 export type InputProps = { readOnly?: boolean } & InputBorderProps &
   InputSizeProps &
   TypographyProps &
-  LayoutProps
+  WidthProps &
+  MaxWidthProps
 
 export const Input: StyledComponent<
   InputProps,
-  HTMLAttributes<HTMLInputElement>
+  Omit<InputHTMLAttributes<HTMLInputElement>, keyof InputProps>
 > = styled.input<InputProps>`
   display: flex;
   outline: 0;
   font-family: ${themeFont};
   color: ${themeColor('darks.1')};
+  ${width}
+  ${maxWidth}
   ${size}
   ${inputBorder}
   ${typography}
-  ${layout}
 `
 Input.displayName = 'Input'
 
 export const TextArea: StyledComponent<
   InputProps,
-  HTMLAttributes<HTMLTextAreaElement>
+  InputHTMLAttributes<HTMLTextAreaElement>
 > = styled(Input.withComponent('textarea'))`
   resize: none;
 `
