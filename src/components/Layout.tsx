@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react'
+import { Fragment, Children, ReactNode } from 'react'
 import { ResponsiveValue } from 'styled-system'
 import { Box } from './Box'
 import { Flex, FlexBoxProps } from './Flex'
@@ -25,10 +25,10 @@ export const Layout = ({
   return (
     <Flex {...flexProps} flexDirection={direction}>
       {childrenArray.map((child, i) => (
-        <>
+        <Fragment key={i}>
           {child}
           {child && i < childrenArray.length - 1 && <Box {...spaceProps} />}
-        </>
+        </Fragment>
       ))}
     </Flex>
   )
