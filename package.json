@@ -1,6 +1,6 @@
 {
   "name": "stinodes-ui",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "private": false,
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
