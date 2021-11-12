@@ -20,7 +20,7 @@ const GridTemplate: Story<GridTemplateProps> = ({
     <Box bg="lights.1">
       <Row {...props} gutter={gutter}>
         {cols.map((_, i) => (
-          <Col width={1 / columns}>
+          <Col key={i} width={1 / columns}>
             <Box height={200} bg={i % 2 === 0 ? 'greens.3' : 'blues.3'} />
           </Col>
         ))}
