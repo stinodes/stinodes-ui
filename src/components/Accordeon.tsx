@@ -9,8 +9,15 @@ import {
 } from 'react'
 import { useMixedState } from '../hooks/useMixedState'
 import { Box } from './Box'
-import { FlexButton } from './Button'
+import { Paragraph } from './Typography'
 
+const EmptyButton = styled(Paragraph.withComponent('button'))`
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+`
 const AccordeonContent = styled(Box)`
   height: ${props => props.height || 0}px;
   transition: height 0.2s ease;
@@ -19,7 +26,7 @@ const AccordeonContent = styled(Box)`
 
 type BaseProps = {
   children: ReactNode
-  content: ReactNode
+  header: ReactNode
 }
 type ControlledProps = {
   visible: boolean
@@ -34,7 +41,7 @@ type Props = BaseProps & (ControlledProps | UncontrolledProps)
 
 export const Accordeon = ({
   children,
-  content,
+  header,
   visible: visibleProp,
   onChange,
 }: Props) => {
@@ -52,9 +59,9 @@ export const Accordeon = ({
 
   return (
     <Fragment>
-      <FlexButton onClick={() => setVisible(!visible)}>{children}</FlexButton>
+      <EmptyButton onClick={() => setVisible(!visible)}>{header}</EmptyButton>
       <AccordeonContent height={height}>
-        <div ref={contentRef}>{content}</div>
+        <div ref={contentRef}>{children}</div>
       </AccordeonContent>
     </Fragment>
   )

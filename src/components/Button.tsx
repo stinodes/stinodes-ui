@@ -130,6 +130,7 @@ const Button: StyledComponent<
   text-align: center;
   transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease,
     border-color 0.3s ease;
+  cursor: pointer;
   ${space}
   ${size}
   ${colorVariant}
