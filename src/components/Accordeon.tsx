@@ -12,6 +12,7 @@ import { Box } from './Box'
 import { Paragraph } from './Typography'
 
 const EmptyButton = styled(Paragraph.withComponent('button'))`
+  display: flex;
   padding: 0;
   background: none;
   border: none;
@@ -59,7 +60,9 @@ export const Accordeon = ({
 
   return (
     <Fragment>
-      <EmptyButton onClick={() => setVisible(!visible)}>{header}</EmptyButton>
+      <EmptyButton type="button" onClick={() => setVisible(!visible)}>
+        {header}
+      </EmptyButton>
       <AccordeonContent height={height}>
         <div ref={contentRef}>{children}</div>
       </AccordeonContent>
