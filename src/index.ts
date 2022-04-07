@@ -2,6 +2,7 @@ export * from './theme'
 export * from './utils'
 
 // COMPONENTS
+export * from './components/Accordeon'
 export * from './components/Box'
 export * from './components/Layout'
 export * from './components/Button'
