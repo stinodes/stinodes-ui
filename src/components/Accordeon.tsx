@@ -6,6 +6,8 @@ import {
   SetStateAction,
   useMemo,
   useRef,
+  useState,
+  useEffect,
 } from 'react'
 import { useMixedState } from '../hooks/useMixedState'
 import { Box } from './Box'
@@ -51,19 +53,29 @@ export const Accordeon = ({
     state: visibleProp,
     setState: onChange as undefined | Dispatch<SetStateAction<boolean>>,
   })
+  const [height, setHeight] = useState<null | number>(0)
+  const observer = useMemo(
+    () =>
+      new ResizeObserver(entries => setHeight(entries[0].contentRect.height)),
+    [setHeight],
+  )
 
-  const height = useMemo(() => {
-    if (!visible || !contentRef.current) return 0
-    const box = contentRef.current.getBoundingClientRect()
-    return box.height
-  }, [visible, contentRef])
+  useEffect(() => {
+    const content = contentRef.current
+    if (visible && content) {
+      observer.observe(content)
+      return () => {
+        observer.unobserve(content)
+      }
+    }
+  }, [contentRef, visible])
 
   return (
     <Fragment>
       <EmptyButton type="button" onClick={() => setVisible(!visible)}>
         {header}
       </EmptyButton>
-      <AccordeonContent height={height}>
+      <AccordeonContent height={visible ? height : 0}>
         <div ref={contentRef}>{children}</div>
       </AccordeonContent>
     </Fragment>
