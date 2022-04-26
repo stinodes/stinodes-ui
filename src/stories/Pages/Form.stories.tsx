@@ -60,7 +60,7 @@ export const Simple: Story<{ error: boolean }> = props => {
           </Checkbox>
         </Col>
         <Col width={1 / 2} gutter={1}>
-          <Button bg="lights.0" color="darks.0">
+          <Button bg="surfaces.0" color="typography.0">
             Cancel
           </Button>
         </Col>

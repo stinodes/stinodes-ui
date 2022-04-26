@@ -5,27 +5,38 @@ import { space, SpaceProps } from 'styled-system'
 import { themeFont, themeSpace, themeColor } from '../theme'
 import { boxShadowOutline } from '../utils'
 import { Flex, FlexBoxProps } from './Flex'
-import { HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import { Spinner } from './Spinner'
 
 type BaseButtonProps = {
   loading?: boolean
 }
-const BaseButton = ({
-  loading,
-  children,
-  ...props
-}: BaseButtonProps &
-  ColorVariantProps &
-  ButtonSizeProps &
-  HTMLAttributes<HTMLButtonElement>) => (
-  <button {...props}>
-    {loading && props.size === 'circle' ? null : children}
-    {loading && props.size !== 'circle' && <Flex ml={2} />}
-    {loading && (
-      <Spinner size={props.size === 'small' ? 16 : 24} color={props.color} />
-    )}
-  </button>
+const BaseButton = forwardRef<
+  HTMLButtonElement,
+  BaseButtonProps &
+    ColorVariantProps &
+    ButtonSizeProps &
+    HTMLAttributes<HTMLButtonElement>
+>(
+  (
+    {
+      loading,
+      children,
+      ...props
+    }: BaseButtonProps &
+      ColorVariantProps &
+      ButtonSizeProps &
+      HTMLAttributes<HTMLButtonElement>,
+    ref,
+  ) => (
+    <button {...props} ref={ref}>
+      {loading && props.size === 'circle' ? null : children}
+      {loading && props.size !== 'circle' && <Flex ml={2} />}
+      {loading && (
+        <Spinner size={props.size === 'small' ? 16 : 24} color={props.color} />
+      )}
+    </button>
+  ),
 )
 
 type ButtonSizeProps = {
@@ -98,7 +109,7 @@ const shadow = (props: ShadowProps & { theme: Theme }) => {
   const shadows = []
 
   if (props.shadow) {
-    const color = themeColor('darks.2', props.theme)
+    const color = themeColor('typography.2', props.theme)
     shadows.push(`${transparentize(0.7, color)} 0 8px 24px`)
   }
   if (props.important) {
@@ -138,7 +149,7 @@ const Button: StyledComponent<
 `
 Button.defaultProps = {
   bg: 'primary',
-  color: 'lights.4',
+  color: 'surfaces.4',
 }
 Button.displayName = 'Button'
 

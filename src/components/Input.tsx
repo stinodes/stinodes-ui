@@ -9,6 +9,7 @@ import {
   WidthProps,
   maxWidth,
   MaxWidthProps,
+  BackgroundColorProps,
 } from 'styled-system'
 import { themeFont, themeColor, Theme, themeSpace } from '../theme'
 import { boxShadowOutline } from '../utils'
@@ -19,7 +20,7 @@ export const Label: StyledComponent<
   HTMLAttributes<HTMLLabelElement>
 > = styled.label`
   font-family: ${themeFont};
-  color: ${themeColor('darks.4')};
+  color: ${themeColor('typography.4')};
   ${typography}
   ${color}
 `
@@ -32,7 +33,7 @@ type InputBorderProps = {
 }
 const inputBorder = (props: InputBorderProps & { theme: Theme }) => {
   const highlightColor = themeColor(props.border || 'primaries.2', props.theme)
-  let color = themeColor('lights.0', props.theme)
+  let color = themeColor('surfaces.0', props.theme)
 
   if (props.highlight) color = highlightColor
 
@@ -77,6 +78,7 @@ const size = (props: InputSizeProps & { theme: Theme }) => {
 export type InputProps = { readOnly?: boolean } & InputBorderProps &
   InputSizeProps &
   TypographyProps &
+  BackgroundColorProps &
   WidthProps &
   MaxWidthProps
 
@@ -87,7 +89,7 @@ export const Input: StyledComponent<
   display: flex;
   outline: 0;
   font-family: ${themeFont};
-  color: ${themeColor('darks.1')};
+  ${color}
   ${width}
   ${maxWidth}
   ${size}
@@ -95,6 +97,10 @@ export const Input: StyledComponent<
   ${typography}
 `
 Input.displayName = 'Input'
+Input.defaultProps = {
+  bg: 'surfaces.4',
+  color: 'typography.1',
+}
 
 export const TextArea: StyledComponent<
   InputProps,
@@ -102,4 +108,8 @@ export const TextArea: StyledComponent<
 > = styled(Input.withComponent('textarea'))`
   resize: none;
 `
+TextArea.defaultProps = {
+  bg: 'surfaces.4',
+  color: 'typography.1',
+}
 TextArea.displayName = 'TextArea'

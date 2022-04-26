@@ -28,20 +28,20 @@ const Body: StyledComponent<
 `
 Body.displayName = 'Modal.Body'
 Body.defaultProps = {
-  color: 'darks.1',
+  color: 'typography.1',
   fontSize: 16,
   p: 3,
   flexDirection: 'column',
 }
 
 const Header: typeof H2 = styled(H2)`
-  border-bottom: 1px solid ${themeColor('lights.1')};
+  border-bottom: 1px solid ${themeColor('surfaces.1')};
 `
 Header.displayName = 'Modal.Header'
 Header.defaultProps = { px: 3, py: 2 }
 
 const Footer: typeof Flex = styled(Flex)`
-  border-top: 1px solid ${themeColor('lights.1')};
+  border-top: 1px solid ${themeColor('surfaces.1')};
 `
 Footer.displayName = 'Modal.Footer'
 Footer.defaultProps = { p: 3, py: 2 }
@@ -100,7 +100,7 @@ export const Modal = ({ visible, onClose, children, ...props }: ModalProps) => {
         <Underlay
           css={transitionStyles}
           onClick={onClose}
-          bg="darks.4"
+          bg="typography.4"
           alignItems="center"
           p={3}
           flexDirection="column">
@@ -119,7 +119,7 @@ export const Modal = ({ visible, onClose, children, ...props }: ModalProps) => {
   )
 }
 Modal.defaultProps = {
-  bg: 'lights.4',
+  bg: 'surfaces.4',
   maxWidth: 496,
   width: 1,
   shadow: true,

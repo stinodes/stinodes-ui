@@ -1,9 +1,14 @@
-import { UIThemeProvider } from '../src'
+import { createTheme, UIThemeProvider, convertToDark, Box } from '../src'
+
+const theme = convertToDark(createTheme({}))
+// const theme = createTheme({})
 
 export const decorators = [
   Story => (
-    <UIThemeProvider>
-      <Story />
+    <UIThemeProvider theme={theme}>
+      <Box bg="surfaces.4" minHeight={500}>
+        <Story />
+      </Box>
     </UIThemeProvider>
   ),
 ]

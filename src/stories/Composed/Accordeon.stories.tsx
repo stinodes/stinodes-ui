@@ -15,7 +15,7 @@ const Template: Story<{ text: string }> = ({ text: textProp }) => {
   const [text, setText] = useState(textProp)
   return (
     <div>
-      <Card width={400} p={2} mb={4} bg="lights.2" flexDirection="column">
+      <Card width={400} p={2} mb={4} bg="surfaces.2" flexDirection="column">
         <Accordeon
           visible={state}
           onChange={setState}

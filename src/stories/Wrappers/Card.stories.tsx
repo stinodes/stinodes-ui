@@ -31,7 +31,7 @@ const CardTemplate: Story<CardTemplateProps> = ({
   const spacingProps = stringToProps(spacings)
 
   return (
-    <Box p={4} bg="lights.2">
+    <Box p={4} bg="surfaces.2">
       <Card {...props} {...spacingProps} shadow={shadow} border={border} />{' '}
     </Box>
   )
@@ -39,9 +39,9 @@ const CardTemplate: Story<CardTemplateProps> = ({
 
 export const Example = CardTemplate.bind({})
 Example.args = {
-  bg: 'lights.4',
-  shadow: 'darks.2',
-  border: 'darks.2',
+  bg: 'surfaces.4',
+  shadow: 'typography.2',
+  border: 'typography.2',
   width: 200,
   height: 200,
   spacings: '',

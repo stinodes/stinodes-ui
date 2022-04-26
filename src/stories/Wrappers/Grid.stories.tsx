@@ -17,7 +17,7 @@ const GridTemplate: Story<GridTemplateProps> = ({
 }) => {
   const cols = Array(columns).fill(null)
   return (
-    <Box bg="lights.1">
+    <Box bg="surfaces.1">
       <Row {...props} gutter={gutter}>
         {cols.map((_, i) => (
           <Col key={i} width={1 / columns}>
