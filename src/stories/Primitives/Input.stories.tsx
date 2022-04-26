@@ -29,7 +29,7 @@ export const TextInput: Story<{
   placeholder: string
 }> = Template.bind({})
 TextInput.args = {
-  color: 'darks.1',
+  color: 'typography.1',
   error: false,
   highlight: false,
   placeholder: 'Placeholder text...',
@@ -44,7 +44,7 @@ export const TextAreaInput: Story<{
   return <TextArea {...props} />
 }
 TextAreaInput.args = {
-  color: 'darks.1',
+  color: 'typography.1',
   error: false,
   highlight: false,
   placeholder: 'Placeholder text...',

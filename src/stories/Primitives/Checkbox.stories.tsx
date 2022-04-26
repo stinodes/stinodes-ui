@@ -16,7 +16,7 @@ const Template: Story<ComponentPropsWithoutRef<typeof Checkbox>> = props => {
 }
 export const Example = Template.bind({})
 Example.args = {
-  color: 'darks.3',
+  color: 'typography.3',
   border: 'primary',
   error: false,
   highlight: false,

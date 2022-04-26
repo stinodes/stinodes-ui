@@ -31,7 +31,7 @@ const Chevron = styled(Icon)<{ open: boolean }>`
 `
 
 const OptionsCard = styled(Card)`
-  background: ${themeColor('lights.4')};
+  background: ${themeColor('surfaces.4')};
   flex-direction: column;
   max-height: 264px;
   overflow-y: auto;
@@ -41,7 +41,7 @@ const Option = styled.button`
   display: flex;
   font-family: ${themeFont};
   font-size: 16px;
-  color: ${themeColor('darks.1')};
+  color: ${themeColor('typography.1')};
   border: none;
   outline: none;
   padding: 8px 16px;
@@ -50,7 +50,7 @@ const Option = styled.button`
   align-items: flex-start;
   border-radius: inherit;
   :hover {
-    background: ${themeColor('lights.2')};
+    background: ${themeColor('surfaces.2')};
   }
 `
 type StringSelectInputProps = {
@@ -122,7 +122,7 @@ export const Select = ({
       <Wrapper>
         <Input {...inputProps} readOnly onClick={() => setVisible(true)} />
         <ChevronContainer>
-          <Chevron open={false} icon="chevron-down" />
+          <Chevron open={false} icon="chevron-down" color="typography.2" />
         </ChevronContainer>
       </Wrapper>
     </PopOut>

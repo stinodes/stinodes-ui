@@ -21,7 +21,7 @@ export const Text: StyledComponent<
 > = styled.span`
   font-family: ${themeFont};
   margin: 0;
-  color: ${themeColor('darks.1')};
+  color: ${themeColor('typography.1')};
   line-height: 1.3;
   ${typoStyling};
 `

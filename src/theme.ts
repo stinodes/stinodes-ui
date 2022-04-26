@@ -2,7 +2,7 @@ import { mergeDeepRight } from 'ramda'
 import { transparentize } from 'polished'
 import { Theme as EmotionTheme } from '@emotion/react'
 import { themeGet } from '@styled-system/theme-get'
-import { Theme as _Theme } from 'styled-system'
+import { ObjectOrArray, Theme as _Theme } from 'styled-system'
 
 const blues = ['#004D93', '#0063BE', '#0078e7', '#2E90EB', '#5CA9EF']
 const teals = ['#009487', '#00BEAE', '#00E8D4', '#2EECDB', '#5CF0E3']
@@ -12,7 +12,10 @@ const yellows = ['#9F9500', '#CCBF00', '#F9E900', '#FAED2E', '#FAED2E']
 const darks = ['#2C2F3C', '#404360', '#60637D', '#7F849D', '#9D9EB6']
 const lights = ['#D4D6E3', '#E9E9F0', '#F0F2F6', '#F9FAFC', '#FCFCFD']
 
-export const baseTheme = {
+const surfaces = lights
+const typography = darks
+
+export const createBaseTheme = () => ({
   colors: {
     blues,
     teals,
@@ -22,7 +25,7 @@ export const baseTheme = {
     darks,
     lights,
     primaries: blues,
-    text: darks[2],
+    text: typography[2],
     error: reds[2],
     fadedError: reds[4],
     success: greens[2],
@@ -30,17 +33,40 @@ export const baseTheme = {
     overlay: transparentize(0.1, darks[4]),
 
     primary: blues[2],
+
+    // Utility named
+    surfaces,
+    typography,
+
+    shadow: darks[0],
   },
   fontFamily: 'Montserrat',
   breakpoints: { sm: '0em', md: '40em', lg: '64em', xlg: '80em' },
   space: [0, 8, 16, 24, 32, 48, 64, 128, 256, 512],
-}
+})
 
 type CustomTheme = _Theme & { fontFamily: string }
 export type { CustomTheme as Theme }
 
-export const createTheme = (theme: Partial<CustomTheme>) =>
-  mergeDeepRight(baseTheme, theme)
+export const createTheme = (theme: Partial<CustomTheme> = {}) =>
+  mergeDeepRight(createBaseTheme(), theme)
+
+export const convertToDark = (theme: {
+  colors: { [name: string]: ObjectOrArray<string> | string }
+}) => {
+  const colors = theme.colors
+  if (!colors) return theme
+
+  Object.keys(colors).forEach(key => {
+    const color = colors[key]
+    if (Array.isArray(color)) colors[key] = [...color].reverse()
+  })
+  colors.typography = colors.lights
+  colors.surfaces = colors.darks
+  colors.shadow = colors.darks[4]
+  theme.colors = colors
+  return theme
+}
 
 export const themeFont = themeGet('fontFamily')
 

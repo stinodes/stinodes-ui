@@ -15,7 +15,7 @@ ContextCard.defaultProps = {
   flexDirection: 'column',
   shadow: true,
   border: true,
-  bg: 'lights.4',
+  bg: 'surfaces.4',
 }
 
 type ContextMenuProps = {
@@ -38,8 +38,8 @@ export const ContextMenu = ({
       component={
         <Button
           size="circle"
-          bg="lights.4"
-          color="darks.1"
+          bg="surfaces.4"
+          color="typography.1"
           outlineColor="primary"
           {...buttonProps}
         />
@@ -63,8 +63,8 @@ Item.displayName = 'ContextMenu.Item'
 Item.defaultProps = {
   px: 2,
   py: 2,
-  bg: 'lights.4',
-  color: 'darks.1',
+  bg: 'surfaces.4',
+  color: 'typography.1',
   fontSize: 16,
   outlineColor: 'transparent',
 }

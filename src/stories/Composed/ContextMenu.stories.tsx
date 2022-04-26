@@ -24,7 +24,7 @@ export const ExtendedProps = () => {
   return (
     <div style={{ position: 'absolute', top: 32, right: 32 }}>
       <ContextMenu
-        cardProps={{ bg: 'darks.4', p: 3 }}
+        cardProps={{ bg: 'surfaces.3', p: 3 }}
         buttonProps={{ bg: 'primary', color: 'white' }}>
         <Text>This is a menu from a customized context menu</Text>
       </ContextMenu>

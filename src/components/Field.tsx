@@ -29,7 +29,7 @@ export const Field = ({
           {error}
         </Text>
       ) : help ? (
-        <Text mt="2px" fontSize={12} color="darks.4">
+        <Text mt="2px" fontSize={12} color="typography.4">
           {help}
         </Text>
       ) : null}

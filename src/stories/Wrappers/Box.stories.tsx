@@ -28,7 +28,7 @@ const BoxTemplate: Story<BoxTemplateProps> = ({ spacings, ...props }) => {
 }
 export const Example = BoxTemplate.bind({})
 Example.args = {
-  bg: 'lights.1',
+  bg: 'surfaces.1',
   width: 400,
   height: 200,
   spacings: 'px:100,mt:50',

@@ -13,7 +13,7 @@ type BorderColorProps = {
 }
 const borderColor = (props: BorderColorProps & { theme: Theme }) => {
   const highlightColor = themeColor(props.border || 'primaries.2', props.theme)
-  let color = themeColor('lights.0', props.theme)
+  let color = themeColor('surfaces.0', props.theme)
 
   if (props.error) color = themeColor('error', props.theme)
   if (props.highlight) color = highlightColor
@@ -74,7 +74,7 @@ const StyledCheckbox = styled.label<BorderColorProps>`
       opacity: 0;
       font-size: 16px;
       transition: opacity 0.3s ease;
-      color: ${themeColor('lights.4')};
+      color: ${themeColor('surfaces.4')};
     }
   }
   input:checked ~ span.checkbox {
@@ -107,7 +107,7 @@ export const Checkbox: ComponentType<CheckboxProps> = ({
     <span className="checkbox">
       <Icon icon="check" />
     </span>
-    <Text color={color || 'darks.3'} fontSize={fontSize}>
+    <Text color={color || 'typography.3'} fontSize={fontSize}>
       {children}
     </Text>
   </StyledCheckbox>

@@ -14,11 +14,10 @@ export default {
   },
 }
 
-export const Example: Story<
-  ComponentPropsWithoutRef<typeof Button>
-> = props => {
-  return <Button {...props} />
-}
+export const Example: Story<ComponentPropsWithoutRef<typeof Button>> =
+  props => {
+    return <Button {...props} />
+  }
 Example.args = {
   bg: 'primary',
   color: 'white',
@@ -42,7 +41,7 @@ export const FlexButtonExample: Story<{
   )
 }
 FlexButtonExample.args = {
-  bg: 'lights.4',
+  bg: 'surfaces.4',
   shadow: false,
   important: false,
   loading: false,

@@ -13,7 +13,7 @@ type LayoutTemplateProps = {
 const LayoutTemplate: Story<LayoutTemplateProps> = ({ ...props }) => {
   const cols = Array(5).fill(null)
   return (
-    <Layout {...props} bg="lights.3">
+    <Layout {...props} bg="surfaces.3">
       {cols.map((_, i) => (
         <Box key={i} bg="primary" width={200} height={200} />
       ))}
