@@ -31,7 +31,7 @@ export const Uncontrolled: Story<{
       <PopOut
         {...props}
         content={
-          <Card shadow bg="lights.4" px={2} py={1}>
+          <Card shadow bg="surfaces.4" px={2} py={1}>
             <Text>This is a pop-out.</Text>
           </Card>
         }>
@@ -66,11 +66,11 @@ export const Controlled: Story<{
         visible={state}
         onClose={() => setState(false)}
         content={
-          <Card shadow bg="lights.4" px={2} py={1}>
+          <Card shadow bg="surfaces.4" px={2} py={1}>
             <Text>This is a controlled pop-out.</Text>
           </Card>
         }>
-        <Card shadow bg="lights.4" p={3}>
+        <Card shadow bg="surfaces.4" p={3}>
           <Text>I am a card with a controlled pop-out</Text>
         </Card>
       </PopOut>

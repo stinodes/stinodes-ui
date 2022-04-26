@@ -12,7 +12,7 @@ export const TableRow: StyledComponent<
   border-spacing: 0;
   td,
   th {
-    border-bottom: ${themeColor('lights.2')}
+    border-bottom: ${themeColor('surfaces.2')}
       ${props => (props.border ? 1 : 0)}px solid;
   }
 `
@@ -30,7 +30,7 @@ export const Cell: StyledComponent<
 `
 Cell.displayName = 'Cell'
 Cell.defaultProps = {
-  color: 'darks.2',
+  color: 'typography.2',
   bg: 'white',
 }
 
@@ -48,7 +48,7 @@ export const TableHeader: StyledComponent<
 `
 TableHeader.displayName = 'TableHeader'
 TableHeader.defaultProps = {
-  color: 'darks.4',
+  color: 'typography.4',
 }
 
 const StyledTable: StyledComponent<
@@ -64,7 +64,7 @@ export const Table = (props: TableProps) => {
 }
 Table.displayName = 'Table'
 Table.defaultProps = {
-  bg: 'lights.3',
+  bg: 'surfaces.3',
   width: 1,
 }
 

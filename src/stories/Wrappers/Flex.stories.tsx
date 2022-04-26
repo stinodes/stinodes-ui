@@ -29,7 +29,7 @@ const FlexTemplate: Story<FlexTemplateProps> = ({ spacings, ...props }) => {
 }
 export const Example = FlexTemplate.bind({})
 Example.args = {
-  bg: 'lights.1',
+  bg: 'surfaces.1',
   width: 400,
   height: 200,
   spacings: 'px:100,mt:50',

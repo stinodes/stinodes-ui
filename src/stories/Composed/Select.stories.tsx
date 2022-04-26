@@ -34,7 +34,7 @@ const Template: Story<{
 }
 export const Example = Template.bind({})
 Example.args = {
-  color: 'darks.1',
+  color: 'typography.1',
   error: false,
   highlight: false,
   placeholder: 'Placeholder text...',
