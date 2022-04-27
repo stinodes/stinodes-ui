@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ComponentType } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import { ResponsiveValue } from 'styled-system'
 import { Text } from './Typography'
 
@@ -10,9 +10,11 @@ type IconProps = {
   className?: string
 }
 
-export const Icon: ComponentType<
-  IconProps & ComponentPropsWithoutRef<typeof Text>
-> = ({ icon, className, ...props }) => (
+export const Icon = ({
+  icon,
+  className,
+  ...props
+}: IconProps & ComponentPropsWithoutRef<typeof Text>) => (
   <I
     fontSize={props.size}
     {...props}
