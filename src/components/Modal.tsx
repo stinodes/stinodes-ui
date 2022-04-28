@@ -24,6 +24,7 @@ const Body: StyledComponent<
   HTMLAttributes<HTMLDivElement>
 > = styled(Flex)<TypographyProps>`
   font-family: ${themeFont};
+  overflow: auto;
   ${typography}
 `
 Body.displayName = 'Modal.Body'
@@ -108,6 +109,7 @@ export const Modal = ({ visible, onClose, children, ...props }: ModalProps) => {
             {...props}
             flexDirection="column"
             className="modal-card"
+            maxHeight="90vh"
             onClick={e => e.stopPropagation()}>
             {header}
             <Body>{body}</Body>
